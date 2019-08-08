@@ -1,4 +1,4 @@
-USE buyingcatalogue;
+USE [buyingcatalogue];
 GO
 
 INSERT INTO [dbo].[StandardCategory] (Id, CategoryName) VALUES (1, 'Overarching');
