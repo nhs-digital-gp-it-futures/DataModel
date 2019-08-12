@@ -338,7 +338,7 @@ GO
 --
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[OrganisationContact](
-	[Id] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,	
 	[OrganisationId] [varchar](8) NOT NULL,
 	[FirstName] [varchar](35) NOT NULL,
 	[LastName] [varchar](35) NOT NULL,
@@ -396,7 +396,7 @@ CREATE TABLE [dbo].[Solution](
 	[Version] [varchar](10) NOT NULL,
 	[StatusId] [int] NOT NULL,
 	[ParentId] [varchar](14) NULL,
-	[Summary] [varchar](300) NOT NULL,
+	[Summary] [varchar](300) NULL,
 	[AboutUrl] [varchar](1000) NULL,
  CONSTRAINT [PK_SupplierSolution] PRIMARY KEY CLUSTERED 
 (
@@ -855,3 +855,34 @@ GO
 ALTER TABLE [dbo].[MarketingContact] CHECK CONSTRAINT [FK_MarketingContact_Solution]
 GO
 
+/*-----------------------------------------------------------------------
+--
+-- FrameworkSolutions
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[FrameworkSolutions](
+	[FrameworkId] [varchar](10) NOT NULL,
+	[SolutionId] [varchar](14) NOT NULL,
+	[IsFoundation] [bit] NOT NULL CONSTRAINT [DF_FrameworkSolutions_IsFoundation] DEFAULT 0,
+ CONSTRAINT [PK_FrameworkSolutions] PRIMARY KEY CLUSTERED
+( 
+	[FrameworkId] ASC,
+	[SolutionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[FrameworkSolutions]  WITH CHECK ADD  CONSTRAINT [FK_FrameworkSolutions_Framework] FOREIGN KEY([FrameworkId])
+REFERENCES [dbo].[Framework] ([Id])
+GO
+
+ALTER TABLE [dbo].[FrameworkSolutions] CHECK CONSTRAINT [FK_FrameworkSolutions_Framework]
+GO
+
+ALTER TABLE [dbo].[FrameworkSolutions]  WITH CHECK ADD  CONSTRAINT [FK_FrameworkSolutions_Solution] FOREIGN KEY([SolutionId])
+REFERENCES [dbo].[Solution] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[FrameworkSolutions] CHECK CONSTRAINT [FK_FrameworkSolutions_Solution]
+GO
