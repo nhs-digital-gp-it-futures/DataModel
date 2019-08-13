@@ -11,3 +11,12 @@ INSERT INTO [dbo].[StandardStatus] (Id, StatusName) VALUES (1, 'Effective');
 GO
 INSERT INTO [dbo].[CapabilityStatus] (Id, StatusName) VALUES (1, 'Effective');
 GO
+
+INSERT INTO [dbo].[SolutionStatus] (Id, StatusName) VALUES (1, 'Available');
+GO
+
+INSERT INTO [dbo].[SolutionCapabilityStatus] (Id, StatusName) VALUES (1, 'Passed');
+GO
+
+INSERT INTO [dbo].[SolutionStandardStatus] (Id, StatusName) VALUES (1, 'Passed');
+GO
