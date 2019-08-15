@@ -323,7 +323,7 @@ GO
 CREATE TABLE [dbo].[Organisation](
 	[Id] [varchar](8) NOT NULL,
 	[OrganisationName] [varchar](255) NOT NULL,
-	[Summary] [varchar](500) NULL,
+	[Summary] [varchar](1000) NULL,
 	[OrganisationUrl] [varchar](1000) NULL,
 	[OdsCode] [varchar](8) NULL,
 	[CrmRef] [varchar](35) NULL,
@@ -369,17 +369,55 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- SolutionStatus
+-- PublicationStatus
 --
 ------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionStatus](
+CREATE TABLE [dbo].[PublicationStatus](
 	[Id] [int] NOT NULL,
 	[StatusName] [varchar](16) NOT NULL,	
- CONSTRAINT [PK_SolutionStatus] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PublicationStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_SolutionStatusName] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_PublicationStatusName] UNIQUE NONCLUSTERED 
+(
+	[StatusName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- SolutionAuthorityStatus
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[SolutionAuthorityStatus](
+	[Id] [int] NOT NULL,
+	[StatusName] [varchar](16) NOT NULL,	
+ CONSTRAINT [PK_SolutionAuthorityStatus] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_SolutionAuthorityStatusName] UNIQUE NONCLUSTERED 
+(
+	[StatusName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- SolutionSupplierStatus
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[SolutionSupplierStatus](
+	[Id] [int] NOT NULL,
+	[StatusName] [varchar](16) NOT NULL,	
+ CONSTRAINT [PK_SolutionSupplierStatus] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_SolutionSupplierStatusName] UNIQUE NONCLUSTERED 
 (
 	[StatusName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -396,11 +434,14 @@ CREATE TABLE [dbo].[Solution](
 	[OrganisationId] [varchar](8) NOT NULL,
 	[SolutionName] [varchar](255) NOT NULL,
 	[Version] [varchar](10) NOT NULL,
-	[StatusId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL CONSTRAINT [DF_Solution_Status] DEFAULT 1,
+	[AuthorityStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_AuthorityStatus] DEFAULT 1,
+	[SupplierStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_SupplierStatus] DEFAULT 1,
 	[ParentId] [varchar](14) NULL,
 	[Summary] [varchar](300) NULL,
 	[AboutUrl] [varchar](1000) NULL,
- CONSTRAINT [PK_SupplierSolution] PRIMARY KEY CLUSTERED 
+	[OnCatalogueVersion] [int] NOT NULL CONSTRAINT [DF_Solution_OnCatalogueVersion] DEFAULT 0,
+ CONSTRAINT [PK_Solution] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -421,12 +462,27 @@ GO
 ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_Parent]
 GO
 
-ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_SolutionStatus] FOREIGN KEY([StatusId])
-REFERENCES [dbo].[SolutionStatus] ([Id])
+ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_PublicationStatus] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[PublicationStatus] ([Id])
 GO
 
-ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_SolutionStatus]
+ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_PublicationStatus]
 GO
+
+ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_AuthorityStatus] FOREIGN KEY([AuthorityStatusId])
+REFERENCES [dbo].[SolutionAuthorityStatus] ([Id])
+GO
+
+ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_AuthorityStatus]
+GO
+
+ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_SupplierStatus] FOREIGN KEY([SupplierStatusId])
+REFERENCES [dbo].[SolutionSupplierStatus] ([Id])
+GO
+
+ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_SupplierStatus]
+GO
+
 
 /*-----------------------------------------------------------------------
 --
@@ -440,8 +496,7 @@ CREATE TABLE [dbo].[SolutionDetail](
 	[ClientApplication] [nvarchar](max) NULL,
 	[Hosting] [nvarchar](max) NULL,
 	[RoadMap] [varchar](1000) NULL,
-	[RoadMapImageUrl] [varchar](1000) NULL,
-	[TransitionTimescale] [nvarchar](max) NULL,
+	[RoadMapImageUrl] [varchar](1000) NULL,	
  CONSTRAINT [PK_SolutionDetail] PRIMARY KEY CLUSTERED 
 (
 	[SolutionId] ASC
@@ -747,21 +802,78 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- SolutionPrice
+-- PurchasingModel
 --
 ------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionPrice](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[PurchasingModel](
+	[Id] [uniqueidentifier] NOT NULL,
+	[FrameworkId] [varchar](10) NOT NULL,
 	[SolutionId] [varchar](14) NOT NULL,
-	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 0) NOT NULL,
-	[BandStart] [int] NOT NULL,
-	[BandEnd] [int] NULL,
- CONSTRAINT [PK_SolutionPrice] PRIMARY KEY CLUSTERED 
+	[StatusId] [int] NOT NULL CONSTRAINT [DF_PurchasingModel_Status] DEFAULT 1,
+	[AuthorityStatusId] [int] NOT NULL CONSTRAINT [DF_PurchasingModel_AuthorityStatus] DEFAULT 1,
+	[TransitionMinDays] [int] NULL,
+	[TransitionMaxDays] [int] NULL,
+	[TransitionAverageDays] [int] NULL,
+	[TransitionDescription] [varchar](1000) NULL,
+ CONSTRAINT [PK_PurchasingModel] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+CREATE CLUSTERED INDEX [IX_PurchasingModelFrameworkId] ON [dbo].[PurchasingModel]
+(
+	[FrameworkId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[PurchasingModel]  WITH CHECK ADD  CONSTRAINT [FK_PurchasingModel_PublicationStatus] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[PublicationStatus] ([Id])
+GO
+
+ALTER TABLE [dbo].[PurchasingModel] CHECK CONSTRAINT [FK_PurchasingModel_PublicationStatus]
+GO
+
+ALTER TABLE [dbo].[PurchasingModel]  WITH CHECK ADD  CONSTRAINT [FK_PurchasingModel_AuthorityStatus] FOREIGN KEY([AuthorityStatusId])
+REFERENCES [dbo].[SolutionAuthorityStatus] ([Id])
+GO
+
+ALTER TABLE [dbo].[PurchasingModel] CHECK CONSTRAINT [FK_PurchasingModel_AuthorityStatus]
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- SolutionPrice
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[SolutionPrice](
+	[Id] [uniqueidentifier] NOT NULL,
+	[PurchasingModelId] [uniqueidentifier] NOT NULL,
+	[PricingUnitId] [int] NOT NULL,
+	[Price] [decimal](18, 0) NOT NULL,
+	[BandStart] [int] NOT NULL,
+	[BandEnd] [int] NULL,
+	[CreatedDate] [datetime2](7) NOT NULL CONSTRAINT [DF_SolutionPrice_CreatedDate] DEFAULT GetDate(),
+ CONSTRAINT [PK_SolutionPrice] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE CLUSTERED INDEX [IX_SolutionPriceCreatedDate] ON [dbo].[SolutionPrice]
+(
+	[CreatedDate] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_PurchasingModelId] FOREIGN KEY([PurchasingModelId])
+REFERENCES [dbo].[PurchasingModel] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PurchasingModelId]
 GO
 
 ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_PricingUnitType] FOREIGN KEY([PricingUnitId])
@@ -770,15 +882,6 @@ GO
 
 ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PricingUnitType]
 GO
-
-ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_Solution] FOREIGN KEY([SolutionId])
-REFERENCES [dbo].[Solution] ([Id])
-ON DELETE CASCADE
-GO
-
-ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_Solution]
-GO
-
 
 
 /*-----------------------------------------------------------------------
@@ -791,7 +894,7 @@ CREATE TABLE [dbo].[AssociatedService](
 	[SolutionId] [varchar](14) NOT NULL,
 	[ServiceName] [varchar](100) NOT NULL,
 	[ServiceDescription] [varchar](300) NOT NULL,
-	[OrderGuidance] [varchar](300) NOT NULL,
+	[OrderGuidance] [varchar](300) NOT NULL,	
  CONSTRAINT [PK_AssociatedService] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -799,32 +902,46 @@ CREATE TABLE [dbo].[AssociatedService](
 ) ON [PRIMARY]
 GO
 
-
 /*-----------------------------------------------------------------------
 --
 -- AssociatedServicePrice
 --
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[AssociatedServicePrice](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
+	[PurchasingModelId] [uniqueidentifier] NOT NULL,
 	[AssociatedServiceId] [varchar](18) NOT NULL,
 	[PricingUnitId] [int] NOT NULL,
 	[Price] [decimal](18, 0) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,
- CONSTRAINT [PK_AssociatedServicePrice] PRIMARY KEY CLUSTERED 
+	[CreatedDate] [datetime2](7) NOT NULL CONSTRAINT [DF_AssociatedServicePrice_CreatedDate] DEFAULT GetDate(),
+ CONSTRAINT [PK_AssociatedServicePrice] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociatePrice_PricingUnitType] FOREIGN KEY([PricingUnitId])
-REFERENCES [dbo].[PricingUnitType] ([Id])
+CREATE CLUSTERED INDEX [IX_AssociatedServicePriceCreatedDate] ON [dbo].[AssociatedServicePrice]
+(
+	[CreatedDate] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociatedServicePrice_PurchasingModelId] FOREIGN KEY([PurchasingModelId])
+REFERENCES [dbo].[PurchasingModel] ([Id])
 ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociatePrice_PricingUnitType]
+ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociatedServicePrice_PurchasingModelId]
+GO
+
+ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociateServicePrice_PricingUnitType] FOREIGN KEY([PricingUnitId])
+REFERENCES [dbo].[PricingUnitType] ([Id])
+GO
+
+ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociateServicePrice_PricingUnitType]
 GO
 
 
