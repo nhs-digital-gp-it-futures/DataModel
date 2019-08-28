@@ -1,36 +1,48 @@
-USE [buyingcatalogue];
+INSERT INTO [dbo].[StandardCategory] ([Id], [Name]) VALUES (1, 'Overarching');
+INSERT INTO [dbo].[StandardCategory] ([Id], [Name]) VALUES (2, 'Interoperability');
+INSERT INTO [dbo].[StandardCategory] ([Id], [Name]) VALUES (3, 'Context');
+INSERT INTO [dbo].[StandardCategory] ([Id], [Name]) VALUES (4, 'Capability');
 GO
 
-INSERT INTO [dbo].[StandardCategory] (Id, CategoryName) VALUES (1, 'Overarching');
-INSERT INTO [dbo].[StandardCategory] (Id, CategoryName) VALUES (2, 'Interoperability');
-INSERT INTO [dbo].[StandardCategory] (Id, CategoryName) VALUES (3, 'Context');
-INSERT INTO [dbo].[StandardCategory] (Id, CategoryName) VALUES (4, 'Capability');
+INSERT INTO [dbo].[StandardStatus] ([Id], [Name]) VALUES (1, 'Effective');
 GO
 
-INSERT INTO [dbo].[StandardStatus] (Id, StatusName) VALUES (1, 'Effective');
-GO
-INSERT INTO [dbo].[CapabilityStatus] (Id, StatusName) VALUES (1, 'Effective');
+INSERT INTO [dbo].[CapabilityStatus] ([Id], [Name]) VALUES (1, 'Effective');
 GO
 
-INSERT INTO [dbo].[PublicationStatus] (Id, StatusName) VALUES (1, 'Draft');
-INSERT INTO [dbo].[PublicationStatus] (Id, StatusName) VALUES (2, 'Unpublished');
-INSERT INTO [dbo].[PublicationStatus] (Id, StatusName) VALUES (3, 'Published');
-INSERT INTO [dbo].[PublicationStatus] (Id, StatusName) VALUES (4, 'Withdrawn');
+INSERT INTO [dbo].[CapabilityCategory] ([Id], [Name]) VALUES (0, 'Undefined');
 GO
 
-INSERT INTO [dbo].[SolutionSupplierStatus] (Id, StatusName) VALUES (1, 'Draft');
-INSERT INTO [dbo].[SolutionSupplierStatus] (Id, StatusName) VALUES (2, 'AuthorityReview');
-INSERT INTO [dbo].[SolutionSupplierStatus] (Id, StatusName) VALUES (3, 'Completed');
-GO
-
-INSERT INTO [dbo].[SolutionAuthorityStatus] (Id, StatusName) VALUES (1, 'Draft');
-INSERT INTO [dbo].[SolutionAuthorityStatus] (Id, StatusName) VALUES (2, 'Completed');
-GO
-
-INSERT INTO [dbo].[SolutionCapabilityStatus] (Id, StatusName) VALUES (1, 'Passed');
-GO
-
-INSERT INTO [dbo].[SolutionStandardStatus] (Id, StatusName) VALUES (1, 'Passed');
+INSERT INTO [dbo].[EpicCategory] ([Id], [Name]) VALUES (0, 'Undefined');
 GO
 
 
+INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (1, 'MUST');
+INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (2, 'SHOULD');
+INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (3, 'MAY');
+GO
+
+
+INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (1, 'Draft');
+INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (2, 'Unpublished');
+INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (3, 'Published');
+INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (4, 'Withdrawn');
+GO
+
+INSERT INTO [dbo].[SolutionSupplierStatus] ([Id], [Name]) VALUES (1, 'Draft');
+INSERT INTO [dbo].[SolutionSupplierStatus] ([Id], [Name]) VALUES (2, 'Authority Review');
+INSERT INTO [dbo].[SolutionSupplierStatus] ([Id], [Name]) VALUES (3, 'Completed');
+GO
+
+INSERT INTO [dbo].[SolutionAuthorityStatus] ([Id], [Name]) VALUES (1, 'Draft');
+INSERT INTO [dbo].[SolutionAuthorityStatus] ([Id], [Name]) VALUES (2, 'Completed');
+GO
+
+INSERT INTO [dbo].[SolutionCapabilityStatus] ([Id], [Name]) VALUES (1, 'Passed');
+GO
+
+INSERT INTO [dbo].[SolutionStandardStatus] ([Id], [Name]) VALUES (1, 'Passed');
+GO
+
+INSERT [dbo].[PricingUnitType] ([Id], [Name]) VALUES (1, N'Patient')
+GO

@@ -1,10 +1,46 @@
-USE [buyingcatalogue]
-GO
-
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- CompliancyLevel
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[CompliancyLevel](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](16) NOT NULL,
+ CONSTRAINT [PK_CompliancyLevel] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_CompliancyLevelName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+/*-----------------------------------------------------------------------
+--
+-- CapabilityCategory
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[CapabilityCategory](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](16) NOT NULL,
+ CONSTRAINT [PK_CapabilityCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_CapabilityCategoryName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 /*-----------------------------------------------------------------------
@@ -14,15 +50,19 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[CapabilityStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,
- CONSTRAINT [PK_CapabilityStatus_1] PRIMARY KEY CLUSTERED 
+	[Name] [varchar](16) NOT NULL,
+ CONSTRAINT [PK_CapabilityStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_CapabilityStatusName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-
+ 
 /*-----------------------------------------------------------------------
 --
 -- Capability
@@ -35,10 +75,11 @@ CREATE TABLE [dbo].[Capability](
 	[Version] [varchar](10) NOT NULL,
 	[PreviousVersion] [varchar](10) NULL,
 	[StatusId] [int] NOT NULL,
-	[CapabilityName] [varchar](255) NOT NULL,
-	[CapabilityDescription] [varchar](500) NOT NULL,
+	[Name] [varchar](255) NOT NULL,
+	[Description] [varchar](500) NOT NULL,
 	[SourceUrl] [varchar](1000) NULL,
 	[EffectiveDate] [date] NOT NULL,
+	[CategoryId] [int] NOT NULL,
  CONSTRAINT [PK_Capability] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -59,6 +100,32 @@ GO
 ALTER TABLE [dbo].[Capability] CHECK CONSTRAINT [FK_Capability_CapabilityStatus]
 GO
 
+ALTER TABLE [dbo].[Capability]  WITH CHECK ADD  CONSTRAINT [FK_Capability_CapabilityCategory] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[CapabilityCategory] ([Id])
+GO
+
+ALTER TABLE [dbo].[Capability] CHECK CONSTRAINT [FK_Capability_CapabilityCategory]
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- EpicCategory
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[EpicCategory](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](16) NOT NULL,
+ CONSTRAINT [PK_EpicCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_EpicCategoryStatusName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 /*-----------------------------------------------------------------------
 --
 -- Epic
@@ -67,9 +134,11 @@ GO
 CREATE TABLE [dbo].[Epic](
 	[Id] [uniqueidentifier] NOT NULL,
 	[EpicRef] [varchar](16) NOT NULL,
-	[EpicName] [varchar](100) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
 	[CapabilityId] [uniqueidentifier] NOT NULL,
 	[SourceUrl] [varchar](max) NULL,
+	[CategoryId] [int],
+	[CompliancyLevelId] [int],
  CONSTRAINT [PK_Epic] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -90,38 +159,19 @@ GO
 ALTER TABLE [dbo].[Epic] CHECK CONSTRAINT [FK_Epic_Capability]
 GO
 
-
-/*-----------------------------------------------------------------------
---
--- EpicAcceptanceCriteria
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[EpicAcceptanceCriteria](
-	[Id] [uniqueidentifier] NOT NULL,
-	[EpicId] [uniqueidentifier] NOT NULL,
-	[EpicRef] [varchar](16) NOT NULL,
-	[AcName] [varchar](100) NOT NULL,
-	[AcDescription] [varchar](max) NOT NULL,
- CONSTRAINT [PK_EpicAcceptanceCriteria] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+ALTER TABLE [dbo].[Epic]  WITH CHECK ADD  CONSTRAINT [FK_Epic_EpicCategory] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[EpicCategory] ([Id])
 GO
 
-CREATE CLUSTERED INDEX [IX_EpicAcceptanceCriteriaEpicRef] ON [dbo].[EpicAcceptanceCriteria]
-(
-	[EpicRef] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+ALTER TABLE [dbo].[Epic] CHECK CONSTRAINT [FK_Epic_EpicCategory]
 GO
 
-ALTER TABLE [dbo].[EpicAcceptanceCriteria]  WITH CHECK ADD  CONSTRAINT [FK_EpicAcceptanceCriteria_Epic] FOREIGN KEY([EpicId])
-REFERENCES [dbo].[Epic] ([Id])
+ALTER TABLE [dbo].[Epic]  WITH CHECK ADD  CONSTRAINT [FK_Epic_CompliancyLevel] FOREIGN KEY([CompliancyLevelId])
+REFERENCES [dbo].[CompliancyLevel] ([Id])
 GO
 
-ALTER TABLE [dbo].[EpicAcceptanceCriteria] CHECK CONSTRAINT [FK_EpicAcceptanceCriteria_Epic]
+ALTER TABLE [dbo].[Epic] CHECK CONSTRAINT [FK_Epic_CompliancyLevel]
 GO
-
 
 /*-----------------------------------------------------------------------
 --
@@ -130,14 +180,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[StandardStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_StandardStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_StandardStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -149,10 +199,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[StandardCategory](
 	[Id] [int] NOT NULL,
-	[CategoryName] [varchar](16) NOT NULL,
+	[Name] [varchar](16) NOT NULL,
  CONSTRAINT [PK_StandardCategory] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_StandardCategoryName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -168,8 +222,8 @@ CREATE TABLE [dbo].[Standard](
 	[StandardRef] [varchar](10) NOT NULL,
 	[Version] [varchar](10) NOT NULL,
 	[PreviousId] [int] NULL,
-	[StandardName] [varchar](100) NOT NULL,
-	[StandardDescription] [varchar](500) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](500) NOT NULL,
 	[CategoryId] [int] NOT NULL,
 	[SourceUrl] [varchar](1000) NULL,
 	[StatusId] [int] NOT NULL,
@@ -239,8 +293,8 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[Framework](
 	[Id] [varchar](10) NOT NULL,
-	[FrameworkName] [varchar](100) NOT NULL,
-	[FrameworkDescription] [varchar](max) NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](max) NULL,
 	[Owner] [varchar](100) NULL,
 	[ActiveDate] [date] NULL,
 	[ExpiryDate] [date] NULL,
@@ -322,11 +376,12 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[Organisation](
 	[Id] [varchar](8) NOT NULL,
-	[OrganisationName] [varchar](255) NOT NULL,
+	[Name] [varchar](255) NOT NULL,
 	[Summary] [varchar](1000) NULL,
 	[OrganisationUrl] [varchar](1000) NULL,
 	[OdsCode] [varchar](8) NULL,
-	[CrmRef] [varchar](35) NULL,
+	[PrimaryRoleId] [varchar](8) NULL,
+	[CrmRef] [uniqueidentifier] NULL,
  CONSTRAINT [PK_Organisation] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -374,14 +429,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[PublicationStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_PublicationStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_PublicationStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -393,14 +448,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[SolutionAuthorityStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_SolutionAuthorityStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_SolutionAuthorityStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -412,14 +467,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[SolutionSupplierStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_SolutionSupplierStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_SolutionSupplierStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -432,15 +487,15 @@ GO
 CREATE TABLE [dbo].[Solution](
 	[Id] [varchar](14) NOT NULL,
 	[OrganisationId] [varchar](8) NOT NULL,
-	[SolutionName] [varchar](255) NOT NULL,
+	[Name] [varchar](255) NOT NULL,
 	[Version] [varchar](10) NOT NULL,
-	[StatusId] [int] NOT NULL CONSTRAINT [DF_Solution_Status] DEFAULT 1,
+	[PublishedStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_PublishedStatus] DEFAULT 1,
 	[AuthorityStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_AuthorityStatus] DEFAULT 1,
 	[SupplierStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_SupplierStatus] DEFAULT 1,
-	[ParentId] [varchar](14) NULL,
-	[Summary] [varchar](300) NULL,
-	[AboutUrl] [varchar](1000) NULL,
+	[ParentId] [varchar](14) NULL,	
 	[OnCatalogueVersion] [int] NOT NULL CONSTRAINT [DF_Solution_OnCatalogueVersion] DEFAULT 0,
+	[Summary] [varchar](300) NULL,
+	[FullDescription] [varchar](3000) NOT NULL,
  CONSTRAINT [PK_Solution] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -462,7 +517,7 @@ GO
 ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_Parent]
 GO
 
-ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_PublicationStatus] FOREIGN KEY([StatusId])
+ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_PublicationStatus] FOREIGN KEY([PublishedStatusId])
 REFERENCES [dbo].[PublicationStatus] ([Id])
 GO
 
@@ -486,30 +541,30 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- SolutionDetail
+-- MarketingDetail
 --
 ------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionDetail](
+CREATE TABLE [dbo].[MarketingDetail](
 	[SolutionId] [varchar](14) NOT NULL,
-	[FullDescription] [varchar](3000) NOT NULL,
+	[AboutUrl] [varchar](1000) NULL,	
 	[Features] [nvarchar](max) NULL,
 	[ClientApplication] [nvarchar](max) NULL,
 	[Hosting] [nvarchar](max) NULL,
 	[RoadMap] [varchar](1000) NULL,
 	[RoadMapImageUrl] [varchar](1000) NULL,	
- CONSTRAINT [PK_SolutionDetail] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_MarketingDetail] PRIMARY KEY CLUSTERED 
 (
 	[SolutionId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[SolutionDetail]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDetail_Solution] FOREIGN KEY([SolutionId])
+ALTER TABLE [dbo].[MarketingDetail]  WITH CHECK ADD  CONSTRAINT [FK_MarketingDetail_Solution] FOREIGN KEY([SolutionId])
 REFERENCES [dbo].[Solution] ([Id])
 ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[SolutionDetail] CHECK CONSTRAINT [FK_SolutionDetail_Solution]
+ALTER TABLE [dbo].[MarketingDetail] CHECK CONSTRAINT [FK_MarketingDetail_Solution]
 GO
 
 /*-----------------------------------------------------------------------
@@ -519,14 +574,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[SolutionCapabilityStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,
- CONSTRAINT [PK_CapabilityStatus] PRIMARY KEY CLUSTERED 
+	[Name] [varchar](16) NOT NULL,
+ CONSTRAINT [PK_SolutionCapabilityStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_CapabilityStatusName] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_SolutionCapabilityStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -579,14 +634,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[SolutionEpicStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_EpicStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_EpicStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -654,14 +709,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[SolutionStandardStatus](
 	[Id] [int] NOT NULL,
-	[StatusName] [varchar](16) NOT NULL,	
+	[Name] [varchar](16) NOT NULL,	
  CONSTRAINT [PK_SolutionStandardStatus] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
  CONSTRAINT [IX_SolutionStandardStatusName] UNIQUE NONCLUSTERED 
 (
-	[StatusName] ASC
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -676,8 +731,6 @@ CREATE TABLE [dbo].[SolutionStandard](
 	[SolutionId] [varchar](14) NOT NULL,
 	[StandardId] [uniqueidentifier] NOT NULL,		
 	[StatusId] [int] NOT NULL,
-	[WorkOfPlanDate] [date] NULL,
-	[WorkOfPlanSummary] [varchar](3000) NULL,
  CONSTRAINT [PK_SolutionStandard_1] PRIMARY KEY CLUSTERED 
 (	
 	[SolutionId] ASC,
@@ -711,76 +764,109 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- SolutionProductivityCapability
+-- SolutionDefinedCapability
 --
 ------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionProductivityCapability](	
+CREATE TABLE [dbo].[SolutionDefinedCapability](	
 	[Id] [varchar](18) NOT NULL,	
 	[SolutionId] [varchar](14) NOT NULL,
-	[CapabilityName] [varchar](100) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[CapabilityDescription] [varchar](255) NOT NULL,
+	[Description] [varchar](1000) NOT NULL,
 	[Tag] [varchar](100) NULL,
- CONSTRAINT [PK_SolutionProductivityCapability] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_SolutionDefinedCapability] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityCapability]  WITH CHECK ADD  CONSTRAINT [FK_SolutionProductivityCapability_CapabilityStatus] FOREIGN KEY([StatusId])
+ALTER TABLE [dbo].[SolutionDefinedCapability]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedCapability_CapabilityStatus] FOREIGN KEY([StatusId])
 REFERENCES [dbo].[SolutionCapabilityStatus] ([Id])
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityCapability] CHECK CONSTRAINT [FK_SolutionProductivityCapability_CapabilityStatus]
+ALTER TABLE [dbo].[SolutionDefinedCapability] CHECK CONSTRAINT [FK_SolutionDefinedCapability_CapabilityStatus]
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityCapability]  WITH CHECK ADD  CONSTRAINT [FK_SolutionProductivityCapability_Solution] FOREIGN KEY([SolutionId])
+ALTER TABLE [dbo].[SolutionDefinedCapability]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedCapability_Solution] FOREIGN KEY([SolutionId])
 REFERENCES [dbo].[Solution] ([Id])
 ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityCapability] CHECK CONSTRAINT [FK_SolutionProductivityCapability_Solution]
+ALTER TABLE [dbo].[SolutionDefinedCapability] CHECK CONSTRAINT [FK_SolutionDefinedCapability_Solution]
 GO
 
 
 /*-----------------------------------------------------------------------
 --
--- SolutionProductivityEpic
+-- SolutionDefinedEpic
 --
 ------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionProductivityEpic](
-	[ProductivityCapabilityId] [varchar](18) NOT NULL,
-	[EpicId] [uniqueidentifier] NOT NULL,
-	[SolutionId] [varchar](14) NOT NULL,
+CREATE TABLE [dbo].[SolutionDefinedEpic](
+	[Id] [uniqueidentifier] NOT NULL,
+	[SolutionDefinedCapabilityId] [varchar](18) NOT NULL,	
+	[EpicRef] [varchar](16) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](3000) NOT NULL,
 	[StatusId] [int] NOT NULL,
- CONSTRAINT [PK_SolutionProductivityEpic] PRIMARY KEY CLUSTERED 
-(	
-	[ProductivityCapabilityId] ASC,
-	[EpicId] ASC
+	[CategoryId] [int] NOT NULL,
+ CONSTRAINT [PK_SolutionDefinedEpic] PRIMARY KEY NONCLUSTERED 
+(		
+	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionProductivityEpic_Epic] FOREIGN KEY([EpicId])
-REFERENCES [dbo].[Epic] ([Id])
-GO
-
-ALTER TABLE [dbo].[SolutionProductivityEpic] CHECK CONSTRAINT [FK_SolutionProductivityEpic_Epic]
-GO
-
-ALTER TABLE [dbo].[SolutionProductivityEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionProductivityEpic_SolutionEpicStatus] FOREIGN KEY([StatusId])
+ALTER TABLE [dbo].[SolutionDefinedEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpic_SolutionEpicStatus] FOREIGN KEY([StatusId])
 REFERENCES [dbo].[SolutionEpicStatus] ([Id])
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityEpic] CHECK CONSTRAINT [FK_SolutionProductivityEpic_SolutionEpicStatus]
+ALTER TABLE [dbo].[SolutionDefinedEpic] CHECK CONSTRAINT [FK_SolutionDefinedEpic_SolutionEpicStatus]
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionProductivityEpic_SolutionProductivityCapability] FOREIGN KEY([ProductivityCapabilityId])
-REFERENCES [dbo].[SolutionProductivityCapability] ([Id])
+ALTER TABLE [dbo].[SolutionDefinedEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpic_EpicCategory] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[EpicCategory] ([Id])
 GO
 
-ALTER TABLE [dbo].[SolutionProductivityEpic] CHECK CONSTRAINT [FK_SolutionProductivityEpic_SolutionProductivityCapability]
+ALTER TABLE [dbo].[SolutionDefinedEpic] CHECK CONSTRAINT [FK_SolutionDefinedEpic_EpicCategory]
+GO
+
+ALTER TABLE [dbo].[SolutionDefinedEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpic_SolutionDefinedCapability] FOREIGN KEY([SolutionDefinedCapabilityId])
+REFERENCES [dbo].[SolutionDefinedCapability] ([Id])
+GO
+
+ALTER TABLE [dbo].[SolutionDefinedEpic] CHECK CONSTRAINT [FK_SolutionDefinedEpic_SolutionDefinedCapability]
+GO
+
+/*-----------------------------------------------------------------------
+--
+-- SolutionDefinedEpicAcceptanceCriteria
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[SolutionDefinedEpicAcceptanceCriteria](
+	[Id] [uniqueidentifier] NOT NULL,
+	[EpicId] [uniqueidentifier] NOT NULL,
+	[EpicRef] [varchar](16) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](max) NOT NULL,
+ CONSTRAINT [PK_SolutionDefinedEpicAcceptanceCriteria] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+CREATE CLUSTERED INDEX [IX_SolutionDefinedEpicAcceptanceCriteriaEpicRef] ON [dbo].[SolutionDefinedEpicAcceptanceCriteria]
+(
+	[EpicRef] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SolutionDefinedEpicAcceptanceCriteria]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpicAcceptanceCriteria_SolutionDefinedEpic] FOREIGN KEY([EpicId])
+REFERENCES [dbo].[SolutionDefinedEpic] ([Id])
+GO
+
+ALTER TABLE [dbo].[SolutionDefinedEpicAcceptanceCriteria] CHECK CONSTRAINT [FK_SolutionDefinedEpicAcceptanceCriteria_SolutionDefinedEpic]
 GO
 
 
@@ -791,12 +877,17 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[PricingUnitType](
 	[Id] [int] NOT NULL,
-	[UnitName] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
  CONSTRAINT [PK_PricingUnitType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_PricingUnitTypeName] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
 GO
 
 
@@ -842,6 +933,20 @@ GO
 ALTER TABLE [dbo].[PurchasingModel] CHECK CONSTRAINT [FK_PurchasingModel_AuthorityStatus]
 GO
 
+ALTER TABLE [dbo].[PurchasingModel]  WITH CHECK ADD  CONSTRAINT [FK_PurchasingModel_SolutionId] FOREIGN KEY([SolutionId])
+REFERENCES [dbo].[Solution] ([Id])
+GO
+
+ALTER TABLE [dbo].[PurchasingModel] CHECK CONSTRAINT [FK_PurchasingModel_SolutionId]
+GO
+
+ALTER TABLE [dbo].[PurchasingModel]  WITH CHECK ADD  CONSTRAINT [FK_PurchasingModel_FrameworkId] FOREIGN KEY([FrameworkId])
+REFERENCES [dbo].[Framework] ([Id])
+GO
+
+ALTER TABLE [dbo].[PurchasingModel] CHECK CONSTRAINT [FK_PurchasingModel_FrameworkId]
+GO
+
 /*-----------------------------------------------------------------------
 --
 -- SolutionPrice
@@ -851,7 +956,7 @@ CREATE TABLE [dbo].[SolutionPrice](
 	[Id] [uniqueidentifier] NOT NULL,
 	[PurchasingModelId] [uniqueidentifier] NOT NULL,
 	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 0) NOT NULL,
+	[Price] [decimal](18, 3) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,
 	[CreatedDate] [datetime2](7) NOT NULL CONSTRAINT [DF_SolutionPrice_CreatedDate] DEFAULT GetDate(),
@@ -883,6 +988,55 @@ GO
 ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PricingUnitType]
 GO
 
+/*-----------------------------------------------------------------------
+--
+-- AdditionalServicePrice
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[AdditionalServicePrice](
+	[Id] [uniqueidentifier] NOT NULL,
+	[PurchasingModelId] [uniqueidentifier] NOT NULL,
+	[AdditionalServiceId] [varchar](14) NOT NULL,
+	[PricingUnitId] [int] NOT NULL,
+	[Price] [decimal](18, 3) NOT NULL,
+	[BandStart] [int] NOT NULL,
+	[BandEnd] [int] NULL,
+	[CreatedDate] [datetime2](7) NOT NULL CONSTRAINT [DF_AdditionalServicePrice_CreatedDate] DEFAULT GetDate(),
+ CONSTRAINT [PK_AdditionalServicePrice] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE CLUSTERED INDEX [IX_AdditionalServicePriceAdditionalServiceId] ON [dbo].[AdditionalServicePrice]
+(
+	[AdditionalServiceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_PurchasingModelId] FOREIGN KEY([PurchasingModelId])
+REFERENCES [dbo].[PurchasingModel] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_PurchasingModelId]
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_PricingUnitType] FOREIGN KEY([PricingUnitId])
+REFERENCES [dbo].[PricingUnitType] ([Id])
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_PricingUnitType]
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_Soution] FOREIGN KEY([AdditionalServiceId])
+REFERENCES [dbo].[Solution] ([Id])
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_Soution]
+GO
+
 
 /*-----------------------------------------------------------------------
 --
@@ -892,14 +1046,22 @@ GO
 CREATE TABLE [dbo].[AssociatedService](
 	[Id] [varchar](18) NOT NULL,
 	[SolutionId] [varchar](14) NOT NULL,
-	[ServiceName] [varchar](100) NOT NULL,
-	[ServiceDescription] [varchar](300) NOT NULL,
-	[OrderGuidance] [varchar](300) NOT NULL,	
+	[Name] [varchar](100) NOT NULL,
+	[Description] [varchar](300) NOT NULL,
+	[OrderGuidance] [varchar](300) NULL,	
  CONSTRAINT [PK_AssociatedService] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AssociatedService]  WITH CHECK ADD  CONSTRAINT [FK_AssociatedService_Solution] FOREIGN KEY([SolutionId])
+REFERENCES [dbo].[Solution] ([Id])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[AssociatedService] CHECK CONSTRAINT [FK_AssociatedService_Solution]
 GO
 
 /*-----------------------------------------------------------------------
@@ -912,7 +1074,7 @@ CREATE TABLE [dbo].[AssociatedServicePrice](
 	[PurchasingModelId] [uniqueidentifier] NOT NULL,
 	[AssociatedServiceId] [varchar](18) NOT NULL,
 	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 0) NOT NULL,
+	[Price] [decimal](18, 3) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,
 	[CreatedDate] [datetime2](7) NOT NULL CONSTRAINT [DF_AssociatedServicePrice_CreatedDate] DEFAULT GetDate(),
@@ -1005,3 +1167,38 @@ GO
 
 ALTER TABLE [dbo].[FrameworkSolutions] CHECK CONSTRAINT [FK_FrameworkSolutions_Solution]
 GO
+
+
+/*-----------------------------------------------------------------------
+--
+-- FoundationSet
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[FoundationSet](
+	[FoundationSetId] [varchar](14) NOT NULL,
+	[FrameworkId] [varchar](10) NOT NULL,
+	[SolutionId] [varchar](14) NOT NULL,
+ CONSTRAINT [PK_FoundationSet] PRIMARY KEY CLUSTERED
+( 
+	[FoundationSetId] ASC,
+	[FrameworkId] ASC,
+	[SolutionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[FoundationSet]  WITH CHECK ADD  CONSTRAINT [FK_FoundationSet_Framework] FOREIGN KEY([FrameworkId])
+REFERENCES [dbo].[Framework] ([Id])
+GO
+
+ALTER TABLE [dbo].[FoundationSet] CHECK CONSTRAINT [FK_FoundationSet_Framework]
+GO
+
+ALTER TABLE [dbo].[FoundationSet]  WITH CHECK ADD  CONSTRAINT [FK_FoundationSet_Solution] FOREIGN KEY([SolutionId])
+REFERENCES [dbo].[Solution] ([Id])
+GO
+
+ALTER TABLE [dbo].[FoundationSet] CHECK CONSTRAINT [FK_FoundationSet_Solution]
+GO
+
+
