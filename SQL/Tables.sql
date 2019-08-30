@@ -495,7 +495,7 @@ CREATE TABLE [dbo].[Solution](
 	[ParentId] [varchar](14) NULL,	
 	[OnCatalogueVersion] [int] NOT NULL CONSTRAINT [DF_Solution_OnCatalogueVersion] DEFAULT 0,
 	[Summary] [varchar](300) NULL,
-	[FullDescription] [varchar](3000) NOT NULL,
+	[FullDescription] [varchar](3000) NULL,
  CONSTRAINT [PK_Solution] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
