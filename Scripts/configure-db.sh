@@ -17,7 +17,7 @@ fi
 
 echo "======= MSSQL SERVER STARTED ========" | tee -a ./config.log
 # Run the setup script to create the DB and the schema in the DB
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i "sql/Create Database.sql"
+# /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i "sql/Create Database.sql"
 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d $DB_NAME -i "sql/Tables.sql"
 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d $DB_NAME -i "sql/Common Values.sql"
 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d $DB_NAME -i "sql/Capabilities and Standards.sql"
