@@ -498,7 +498,7 @@ INSERT [dbo].[Solution] ([Id], [OrganisationId], [Name], [Version], [PublishedSt
 INSERT [dbo].[MarketingDetail] ([SolutionId], [Features], [ClientApplication], [Hosting]) 
 	VALUES (N'S1000016-001',			
 			N'["Strictly GDPR and ISO compliant", "99.9% service availability guaranteed", "Wide range of add-ons available", "FHIR compliant", "Plug and play - minimal deployment activity required"]',
-			NULL
+			NULL,
 			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}'
 			)
 GO
@@ -612,4 +612,22 @@ INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId]) (SE
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId]) (SELECT 'S1000019-001', Id, 1 FROM Capability WHERE CapabilityRef = 'C12')
 GO
 
+--********************************************************************************************************************************************************************
+
+INSERT [dbo].[Solution] ([Id], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [Summary],[OnCatalogueVersion]) 
+	VALUES (N'S100000-999', 
+			N'1000099', 
+			N'Blank Solution',
+			N'1.0.0',
+			4,
+			1,
+			1,
+			NULL,
+			0)
+
+GO
+
+INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId]) (SELECT 'S100000-999', Id, 1 FROM Capability WHERE CapabilityRef = 'C5')
+GO
+			
 --********************************************************************************************************************************************************************
