@@ -189,8 +189,6 @@ BEGIN
   COMMIT
 END
 
-
-DROP TABLE IF EXISTS [dbo].[FoundationSet];
 DROP TABLE IF EXISTS [dbo].[FrameworkSolutions];
 DROP TABLE IF EXISTS [dbo].[MarketingContact];
 DROP TABLE IF EXISTS [dbo].[AssociatedServicePrice];
@@ -228,6 +226,7 @@ DROP TABLE IF EXISTS [dbo].[Capability];
 DROP TABLE IF EXISTS [dbo].[CapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[CapabilityCategory];
 DROP TABLE IF EXISTS [dbo].[CompliancyLevel];
+DROP TABLE IF EXISTS [dbo].[Audit];
 
 COMMIT
 

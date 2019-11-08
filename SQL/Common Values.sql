@@ -38,11 +38,13 @@ INSERT INTO [dbo].[SolutionAuthorityStatus] ([Id], [Name]) VALUES (1, 'Draft');
 INSERT INTO [dbo].[SolutionAuthorityStatus] ([Id], [Name]) VALUES (2, 'Completed');
 GO
 
-INSERT INTO [dbo].[SolutionCapabilityStatus] ([Id], [Name]) VALUES (1, 'Passed');
+INSERT INTO [dbo].[SolutionCapabilityStatus] ([Id], [Name], [Pass]) VALUES (1, 'Passed - Full', 1);
+INSERT INTO [dbo].[SolutionCapabilityStatus] ([Id], [Name], [Pass]) VALUES (2, 'Passed - Partial', 1);
+INSERT INTO [dbo].[SolutionCapabilityStatus] ([Id], [Name], [Pass]) VALUES (3, 'Failed', 0);
 GO
 
 INSERT INTO [dbo].[SolutionStandardStatus] ([Id], [Name]) VALUES (1, 'Passed');
 GO
 
-INSERT [dbo].[PricingUnitType] ([Id], [Name]) VALUES (1, N'Patient')
+INSERT [dbo].[PricingUnit] ([Id], [Name], [Description]) VALUES (1, N'Patient', 'Per Registered Patient')
 GO
