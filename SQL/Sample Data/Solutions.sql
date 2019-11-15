@@ -79,6 +79,19 @@ GO
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100001-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C1')
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100001-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
 GO
+INSERT INTO [dbo].[FrameworkSolutions]
+		([FrameworkId]
+        ,[SolutionId]
+        ,[IsFoundation]
+        ,[LastUpdated]
+        ,[LastUpdatedBy])
+		VALUES
+		( N'NHSDGP001'
+		 ,N'100000-001'
+		 ,1
+		 ,GetUtcDate()
+		 ,'00000000-0000-0000-0000-000000000000')
+GO
 
 --********************************************************************************************************************************************************************
 
