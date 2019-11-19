@@ -73,6 +73,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'26b7f5d8-69d9-40b3-a450-73f714ebab5c' WHERE [Id] = '100001-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100001-001', N'Sales@CareShare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -121,6 +124,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8' WHERE [Id] = '100002-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100002-001', N'Sales@Zen.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -152,6 +158,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Intellidoc Comms empowers all practice staff to record & send communications in an extremely streamlined and time-efficient manner.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'4b0e4a4f-2327-44ac-8988-7317a59c110d' WHERE [Id] = '100003-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100003-001', N'Sales@CatterpillarMedworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -189,6 +198,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'fcd89564-bce6-45fb-8d18-3e97b6ad416b' WHERE [Id] = '100004-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100004-001', N'Sales@CurtisSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -223,6 +235,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Document Wizard is the UK industry-leader for clinical document management software due to our patented lightweight interface and interoperability.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'9fe7980f-0a0b-44b3-bd19-0786dd6e1f4e' WHERE [Id] = '100005-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100005-001', N'Sales@ClinicalRaptor.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -262,6 +277,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b6dcb30f-613d-43d7-9039-2ce4cf8508ce' WHERE [Id] = '100006-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100006-001', N'Sales@DocLightning.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -299,6 +317,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'bf543a9e-50d4-4d44-af10-59ee753915b5' WHERE [Id] = '100007-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100007-001', N'Sales@DocabilitySoftware.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -332,6 +353,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Infosource is an extremly lightweight and intuitive information maintenance system that puts data quality and user-friendly interfaces above all else. ',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'80a54afe-ca9e-4d16-b71c-b8fcc6934df8' WHERE [Id] = '100008-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100008-001', N'Sales@EmpireSoftworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -370,6 +394,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')			
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'7eaf35ad-0a8d-435a-be1a-8e1c94ea6445' WHERE [Id] = '100009-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100009-001', N'Sales@CureForward.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -404,6 +431,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Productivity Booster relies on patented technology to discover & recommend optimisations to a wide range of common tasks and processes.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'3fa2d383-8033-45f9-a11e-7eee3a1330c4' WHERE [Id] = '100010-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100010-001', N'Sales@HansaHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -441,6 +471,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'de356266-5c4b-4b56-9b6e-93921a962cf1' WHERE [Id] = '100011-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100011-001', N'Sales@MoonlightIntercare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -476,6 +509,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')			
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'8e9fa72d-0801-4201-b766-9845d661fa0a' WHERE [Id] = '100012-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100012-001', N'Sales@eHealthDevelopment.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -508,6 +544,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Dr Nick''s Poptomiser combines our popoular risk & resource management tools in one convenient package.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'92910a89-d59a-4fe7-9c89-1c0c9e2034c3' WHERE [Id] = '100013-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100013-001', N'Sales@DrNick.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -546,6 +585,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'e2bb8775-62d9-4534-9b3f-57d135182ac0' WHERE [Id] = '100014-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100014-001', N'Sales@TestproofTechnology.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -577,6 +619,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Rising Sun is a total practice management solution built with interoperability in mind. We take pride in our product''s ability to deliver the results that are specifically needed for your practice.',			
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b550e6fc-d02b-4750-91dc-2345b35cdd9e' WHERE [Id] = '100015-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100015-001', N'Sales@HojoHealth.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -617,6 +662,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'7348ec25-d297-4fdf-9d35-c6919cbf329d' WHERE [Id] = '100016-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100016-001', N'Sales@JerichoHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -653,6 +701,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			N'Cure One gives you absolute control over all PC-based care processes in your practice, and our web-based interface allows every practice employee to work remotely from anywhere in the world.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'd9be5aad-bfcf-416f-be68-d60f3e8edd3d' WHERE [Id] = '100017-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100017-001', N'Sales@ManaSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -695,6 +746,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'9433c7b0-0bec-427e-9315-852d7a521de1' WHERE [Id] = '100018-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100018-001', N'Sales@SunhealthNanosystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -733,6 +787,9 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'cc1b5875-24b3-4c0e-b603-c2e8e004dfe5' WHERE [Id] = '100019-001'
+GO
+
 INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100019-001', N'Sales@Oakwood.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
@@ -745,7 +802,7 @@ INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [La
 GO
 
 --********************************************************************************************************************************************************************
-
+/*
 INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100099-999', 
 			N'100099', 
@@ -763,5 +820,6 @@ GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100099-999', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
 GO
+*/
 			
 --********************************************************************************************************************************************************************
