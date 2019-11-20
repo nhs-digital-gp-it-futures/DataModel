@@ -28,7 +28,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b0b981ca-b4db-4bdc-ab05-89780cc750ec' WHERE [Id] = '100000-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100000-001', N'Sales@remedical.co.uk', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100000-001', N'Patsy', N'Delgado', N'07451593188', N'Sales@remedical.co.uk', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100000-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM Capability WHERE CapabilityRef = 'C1')
@@ -80,7 +80,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'26b7f5d8-69d9-40b3-a450-73f714ebab5c' WHERE [Id] = '100001-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100001-001', N'Sales@CareShare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100001-001', N'Sam', N'Thomas', N'07255920626', N'Sales@CareShare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100001-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C1')
@@ -133,7 +133,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8' WHERE [Id] = '100002-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100002-001', N'Sales@Zen.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100002-001', N'Virginia', N'Wilson', N'07810401180', N'Sales@Zen.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100002-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C6')
@@ -171,7 +171,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'4b0e4a4f-2327-44ac-8988-7317a59c110d' WHERE [Id] = '100003-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100003-001', N'Sales@CatterpillarMedworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100003-001', N'Richard', N'Perez', N'07882055950', N'Sales@CatterpillarMedworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100003-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C7')
@@ -211,7 +211,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'fcd89564-bce6-45fb-8d18-3e97b6ad416b' WHERE [Id] = '100004-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100004-001', N'Sales@CurtisSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100004-001', N'Harry', N'Gonzales', N'07219884068', N'Sales@CurtisSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100004-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C8')
@@ -252,7 +252,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'9fe7980f-0a0b-44b3-bd19-0786dd6e1f4e' WHERE [Id] = '100005-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100005-001', N'Sales@ClinicalRaptor.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100005-001', N'Michelle', N'Moore', N'07849662065', N'Sales@ClinicalRaptor.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100005-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C9')
@@ -294,7 +294,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b6dcb30f-613d-43d7-9039-2ce4cf8508ce' WHERE [Id] = '100006-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100006-001', N'Sales@DocLightning.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100006-001', N'Timothy', N'Campbell', N'07107924358', N'Sales@DocLightning.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100006-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C9')
@@ -336,7 +336,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'bf543a9e-50d4-4d44-af10-59ee753915b5' WHERE [Id] = '100007-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100007-001', N'Sales@DocabilitySoftware.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100007-001', N'Cheryl', N'White', N'07295044295', N'Sales@DocabilitySoftware.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100007-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C30')
@@ -376,7 +376,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'80a54afe-ca9e-4d16-b71c-b8fcc6934df8' WHERE [Id] = '100008-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100008-001', N'Sales@EmpireSoftworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100008-001', N'Peter', N'Mitchell', N'07123 456789', N'Sales@EmpireSoftworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100008-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C13')
@@ -417,7 +417,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'7eaf35ad-0a8d-435a-be1a-8e1c94ea6445' WHERE [Id] = '100009-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100009-001', N'Sales@CureForward.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100009-001', N'Joyce', N'Cook', N'07362921146', N'Sales@CureForward.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100009-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C14')
@@ -458,7 +458,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'3fa2d383-8033-45f9-a11e-7eee3a1330c4' WHERE [Id] = '100010-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100010-001', N'Sales@HansaHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100010-001', N'Lisa', N'Thompson', N'07553451033', N'Sales@HansaHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100010-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C41')
@@ -498,7 +498,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'de356266-5c4b-4b56-9b6e-93921a962cf1' WHERE [Id] = '100011-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100011-001', N'Sales@MoonlightIntercare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100011-001', N'Bobby', N'Cooper', N'07170839611', N'Sales@MoonlightIntercare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100011-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C11')
@@ -538,7 +538,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'8e9fa72d-0801-4201-b766-9845d661fa0a' WHERE [Id] = '100012-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100012-001', N'Sales@eHealthDevelopment.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100012-001', N'Julie', N'Bryant', N'07496485801', N'Sales@eHealthDevelopment.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100012-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C16')
@@ -577,7 +577,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'92910a89-d59a-4fe7-9c89-1c0c9e2034c3' WHERE [Id] = '100013-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100013-001', N'Sales@DrNick.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100013-001', N'Stephen', N'Long', N'07327700716', N'Sales@DrNick.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100013-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C35')
@@ -618,7 +618,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'e2bb8775-62d9-4534-9b3f-57d135182ac0' WHERE [Id] = '100014-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100014-001', N'Sales@TestproofTechnology.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100014-001', N'Teresa', N'Robinson', N'07352943019', N'Sales@TestproofTechnology.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100014-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C20')
@@ -656,7 +656,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b550e6fc-d02b-4750-91dc-2345b35cdd9e' WHERE [Id] = '100015-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100015-001', N'Sales@HojoHealth.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100015-001', N'Emily', N'Reed', N'07813453187', N'Sales@HojoHealth.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100015-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
@@ -699,7 +699,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'7348ec25-d297-4fdf-9d35-c6919cbf329d' WHERE [Id] = '100016-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100016-001', N'Sales@JerichoHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100016-001', N'Norma', N'Richardson', N'07555339413', N'Sales@JerichoHealthcare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100016-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
@@ -742,7 +742,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'd9be5aad-bfcf-416f-be68-d60f3e8edd3d' WHERE [Id] = '100017-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100017-001', N'Sales@ManaSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100017-001', N'Harry', N'Parker', N'07704844626', N'Sales@ManaSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100017-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
@@ -787,7 +787,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'9433c7b0-0bec-427e-9315-852d7a521de1' WHERE [Id] = '100018-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100018-001', N'Sales@SunhealthNanosystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100018-001', N'Shawn', N'Martin', N'07362921146', N'Sales@SunhealthNanosystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100018-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
@@ -830,7 +830,7 @@ GO
 UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'cc1b5875-24b3-4c0e-b603-c2e8e004dfe5' WHERE [Id] = '100019-001'
 GO
 
-INSERT [dbo].[MarketingContact] ([SolutionId], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100019-001', N'Sales@Oakwood.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100019-001', N'Craig', N'David', N'07123 456789', N'Sales@Oakwood.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100019-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
