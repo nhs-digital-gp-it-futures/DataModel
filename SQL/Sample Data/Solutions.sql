@@ -261,6 +261,7 @@ GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100005-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C9')
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100005-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C19')
+INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100005-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C41')
 GO
 
 
