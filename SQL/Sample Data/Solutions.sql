@@ -96,7 +96,7 @@ INSERT INTO [dbo].[FrameworkSolutions]
         ,[LastUpdatedBy])
 		VALUES
 		( N'NHSDGP001'
-		 ,N'100000-001'
+		 ,N'100001-001'
 		 ,1
 		 ,GetUtcDate()
 		 ,'00000000-0000-0000-0000-000000000000')
