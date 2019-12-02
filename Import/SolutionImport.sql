@@ -5,7 +5,7 @@ GO
 
 CREATE OR ALTER PROCEDURE SolutionImport
 	@SupplierId varchar(6),
-	@SupplierName varchar(255),
+	@SupplierName varchar(255), -- not used, useful for keeping track
 	@SolutionId varchar(14),
 	@SolutionName varchar(255),
 	@IsFoundation bit,
@@ -25,45 +25,20 @@ BEGIN TRY
 	DECLARE @FrameworkId varchar(10) = 'NHSDGP001'
 	DECLARE @SolutionDetailId UNIQUEIDENTIFIER
 
-	/***
-	Add the organisation if not already present
-	***/
-	IF NOT EXISTS (SELECT 1 FROM [dbo].[Organisation] WHERE [Name] =  @SupplierName)
-	INSERT INTO [dbo].[Organisation]
-			   ([Id]
-			   ,[Name]
-			   ,[CatalogueAgreementSigned]
-			   ,[Deleted]
-			   ,[LastUpdated]
-			   ,[LastUpdatedBy])
-		 VALUES
-			   (NEWID()
-			   ,@SupplierName 
-			   ,0
-			   ,0
-			   ,GETUTCDATE()
-			   ,@EmptyGuid)
 
-	SELECT @OrganisationId = Id 
-	FROM [dbo].[Organisation]
-	WHERE [Name] =  @SupplierName
 
 	/***
-	Add the supplier if not already present
+	Verify that organisation and supplier exist 
 	***/
-	IF NOT EXISTS (SELECT 1 FROM [dbo].[Supplier] WHERE [Name] =  @SupplierName)
-	INSERT INTO [dbo].[Supplier]
-			   ([Id]
-			   ,[OrganisationId]
-			   ,[Name]
-			   ,[LastUpdated]
-			   ,[LastUpdatedBy])
-		 VALUES
-			   (@SupplierId
-			   ,@OrganisationId
-			   ,@SupplierName
-			   ,GETUTCDATE()
-			   ,@EmptyGuid)
+	IF NOT EXISTS (SELECT 1 FROM [dbo].[Supplier] WHERE [Id] =  @SupplierId)
+		THROW 51000, 'Supplier record does not exist.', 1;  
+
+	/***
+	Get the Organisation id
+	***/
+	SELECT @OrganisationId = OrganisationId
+	FROM [dbo].[Supplier]
+	WHERE [Id] =  @SupplierId
 
 	/***
 	Add the solution if not already present
@@ -175,7 +150,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 
-  ROLLBACK TRAN
-
+  ROLLBACK TRAN;
+  THROW;
 END CATCH
 GO
