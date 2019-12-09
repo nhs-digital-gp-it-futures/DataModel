@@ -10,9 +10,6 @@ DELETE FROM [AssociatedServicePrice]
 DELETE FROM [AssociatedServicePrice]
 
 DELETE FROM [Solution]
-DELETE FROM [Supplier]
-DELETE FROM [Organisation]
-DELETE FROM [SupplierContact]
 DELETE FROM [MarketingContact]
 DELETE FROM [AssociatedService]
 
