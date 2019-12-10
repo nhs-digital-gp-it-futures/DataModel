@@ -1,0 +1,3 @@
+# Ensure all SQL and SH files always have LF line endings
+*.sql text eof=lf
+*.sh text eof=lf
