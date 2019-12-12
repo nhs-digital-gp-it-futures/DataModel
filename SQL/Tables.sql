@@ -397,149 +397,6 @@ CREATE CLUSTERED INDEX [IX_OrganisationName] ON [dbo].[Organisation]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
-/*-----------------------------------------------------------------------
---
--- User
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[User](
-	[Id] [uniqueidentifier] NOT NULL,
-	[OrganisationId] [uniqueidentifier] NOT NULL,
-	[UserName] [varchar](256) NOT NULL,	
-	[Email] [varchar](256) NOT NULL,	
-	[EmailConfirmed] [bit] NOT NULL,
-	[Phone] [varchar](35) NULL,
-	[Locked] [bit] NOT NULL,	
-	[CatalogueAgreementSigned] [bit] NOT NULL CONSTRAINT [DF_User_CatlogueAgreementSigned] DEFAULT 0,
-	[Deleted] [bit] NOT NULL CONSTRAINT [DF_User_Deleted] DEFAULT 0,
-	[LastUpdated] [datetime2](7) NOT NULL,
-	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_User] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_UserName] ON [dbo].[User]
-(
-	[UserName] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Organisation] FOREIGN KEY([OrganisationId])
-REFERENCES [dbo].[Organisation] ([Id])
-GO
-
-ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Organisation]
-GO
-
-/*-----------------------------------------------------------------------
---
--- Role
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[Role](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](35) NOT NULL,		
-	[Description] [varchar](150) NOT NULL,
- CONSTRAINT [PK_Role] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_RoleName] ON [dbo].[Role]
-(
-	[Name] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-/*-----------------------------------------------------------------------
---
--- UserRole
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[UserRole](
-	[UserId] [uniqueidentifier] NOT NULL,
-	[RoleId] [varchar](35) NOT NULL,		
-	[Created] [datetime2](7) NOT NULL,
- CONSTRAINT [PK_UserRole] PRIMARY KEY NONCLUSTERED 
-(
-	[UserId] ASC,
-	[RoleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_UserRoleCreated] ON [dbo].[UserRole]
-(
-	[Created] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-/*-----------------------------------------------------------------------
---
--- TeamRole
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[TeamRole](
-	[Name] [varchar](35) NOT NULL,
-	[Description] [varchar](150) NOT NULL,
- CONSTRAINT [PK_TeamRole] PRIMARY KEY CLUSTERED 
-(
-	[Name] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-/*-----------------------------------------------------------------------
---
--- Team
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[Team](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](50) NOT NULL,		
-	[Description] [varchar](500) NOT NULL,
-	[OwnerId] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_Team] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_TeamName] ON [dbo].[Team]
-(
-	[Name] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-
-/*-----------------------------------------------------------------------
---
--- TeamMember
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[TeamMember](
-	[TeamId] [uniqueidentifier] NOT NULL,
-	[UserId] [uniqueidentifier] NOT NULL,		
-	[TeamRoleId] [varchar](35) NOT NULL,		
- CONSTRAINT [PK_TeamMember] PRIMARY KEY NONCLUSTERED 
-(
-	[TeamId] ASC,
-	[UserId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_TeamMemberRoleId] ON [dbo].[TeamMember]
-(
-	[TeamRoleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
 
 /*-----------------------------------------------------------------------
 --
@@ -548,11 +405,14 @@ GO
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[Supplier](
 	[Id] [varchar](6) NOT NULL,
-	[OrganisationId] [uniqueidentifier] NOT NULL,
 	[Name] [varchar](255) NOT NULL,
+	[LegalName] [varchar](255) NOT NULL,
 	[Summary] [varchar](1000) NULL,
 	[SupplierUrl] [varchar](1000) NULL,
-	[CrmRef] [uniqueidentifier] NULL,		
+	[Address] [nvarchar](500) NULL,
+	[OdsCode] [varchar](8) NULL,
+	[CrmRef] [uniqueidentifier] NULL,	
+	[Deleted] bit NOT NULL CONSTRAINT [DF_Supplier_Deleted] DEFAULT 0,
 	[LastUpdated] [datetime2](7) NOT NULL,
 	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
  CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED 
@@ -562,12 +422,6 @@ CREATE TABLE [dbo].[Supplier](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Supplier]  WITH CHECK ADD  CONSTRAINT [FK_Supplier_Organisation] FOREIGN KEY([OrganisationId])
-REFERENCES [dbo].[Organisation] ([Id])
-GO
-
-ALTER TABLE [dbo].[Supplier] CHECK CONSTRAINT [FK_Supplier_Organisation]
-GO
 
 /*-----------------------------------------------------------------------
 --
@@ -583,7 +437,7 @@ CREATE TABLE [dbo].[SupplierContact](
 	[PhoneNumber] [varchar](35) NULL,
 	[LastUpdated] [datetime2](7) NOT NULL,
 	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_OrganisationContact] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_SupplierContact] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -669,8 +523,7 @@ GO
 CREATE TABLE [dbo].[Solution](
 	[Id] [varchar](14) NOT NULL,
 	[ParentId] [varchar](14) NULL,	
-	[SupplierId] [varchar](6) NOT NULL,
-	[OrganisationId] [uniqueidentifier] NOT NULL,	
+	[SupplierId] [varchar](6) NOT NULL,	
 	[SolutionDetailId] [uniqueidentifier] NULL,	
 	[Name] [varchar](255) NOT NULL,
 	[Version] [varchar](10) NULL,
@@ -687,13 +540,6 @@ CREATE TABLE [dbo].[Solution](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_Organisation] FOREIGN KEY([OrganisationId])
-REFERENCES [dbo].[Organisation] ([Id])
-GO
-
-ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_Organisation]
 GO
 
 ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_Supplier] FOREIGN KEY([SupplierId])
@@ -1118,6 +964,7 @@ CREATE TABLE [dbo].[PricingUnit](
 	[Id] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Description] [varchar](500) NOT NULL,
+	[Consumption] [bit] NOT NULL,
  CONSTRAINT [PK_PricingUnit] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -1192,8 +1039,7 @@ CREATE TABLE [dbo].[SolutionPrice](
 	[PricingUnitId] [int] NOT NULL,
 	[Price] [decimal](18, 3) NOT NULL,
 	[BandStart] [int] NOT NULL,
-	[BandEnd] [int] NULL,
-	[IsPerpetual] [bit] NOT NULL CONSTRAINT [DF_SolutionPrice_IsPerpetual] DEFAULT 0,
+	[BandEnd] [int] NULL,	
 	[Created] [datetime2](7) NOT NULL CONSTRAINT [DF_SolutionPrice_Created] DEFAULT GetUtcDate(),
  CONSTRAINT [PK_SolutionPrice] PRIMARY KEY NONCLUSTERED 
 (
@@ -1235,8 +1081,7 @@ CREATE TABLE [dbo].[AdditionalServicePrice](
 	[PricingUnitId] [int] NOT NULL,
 	[Price] [decimal](18, 3) NOT NULL,
 	[BandStart] [int] NOT NULL,
-	[BandEnd] [int] NULL,
-	[IsPerpetual] [bit] NOT NULL CONSTRAINT [DF_AdditionalServicePrice_IsPerpetual] DEFAULT 0,
+	[BandEnd] [int] NULL,	
  CONSTRAINT [PK_AdditionalServicePrice] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -1313,8 +1158,7 @@ CREATE TABLE [dbo].[AssociatedServicePrice](
 	[PricingUnitId] [int] NOT NULL,
 	[Price] [decimal](18, 3) NOT NULL,
 	[BandStart] [int] NOT NULL,
-	[BandEnd] [int] NULL,
-	[IsPerpetual] [bit] NOT NULL CONSTRAINT [DF_AssociatedServicePrice_IsPerpetual] DEFAULT 0,
+	[BandEnd] [int] NULL,	
 	[Created] [datetime2](7) NOT NULL CONSTRAINT [DF_AssociatedServicePrice_Created] DEFAULT GetUtcDate(),
 CONSTRAINT [PK_AssociatedServicePrice] PRIMARY KEY NONCLUSTERED 
 (

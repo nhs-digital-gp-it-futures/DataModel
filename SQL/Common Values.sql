@@ -46,5 +46,5 @@ GO
 INSERT INTO [dbo].[SolutionStandardStatus] ([Id], [Name]) VALUES (1, 'Passed');
 GO
 
-INSERT [dbo].[PricingUnit] ([Id], [Name], [Description]) VALUES (1, N'Patient', 'Per Registered Patient')
+INSERT [dbo].[PricingUnit] ([Id], [Name], [Description], [Consumption]) VALUES (1, N'Patient', 'Per Registered Patient', 0)
 GO

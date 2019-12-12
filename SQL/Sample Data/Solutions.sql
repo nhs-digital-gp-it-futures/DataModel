@@ -1,8 +1,7 @@
 --********************************************************************************************************************************************************************
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy]) 
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy]) 
 	VALUES (N'100000-001', 
 			N'100000', 
-			N'315f73ec-66c6-42cd-b97a-615ca9586be8',
 			N'Write on Time',
 			N'1.0.0',
 			3,
@@ -41,22 +40,21 @@ GO
 
 INSERT [dbo].[PurchasingModel] ([Id], [FrameworkId], [SolutionId], [StatusId], [AuthorityStatusId], [LastUpdated], [LastUpdatedBy]) VALUES (N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'NHSDGP001', N'100000-001', 4, 2, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
-INSERT [dbo].[SolutionPrice] ([Id], [PurchasingModelId], [PricingUnitId], [Price], [BandStart], [BandEnd], [IsPerpetual], [Created]) VALUES (N'd89a6e83-4e1c-4c0b-a5cc-e56b0830aff6', N'60123d1b-7995-470a-baeb-baa94f95bf0a', 1, CAST(1.230 AS Decimal(18, 3)), 1, NULL, 0, GetUtcDate())
+INSERT [dbo].[SolutionPrice] ([Id], [PurchasingModelId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'd89a6e83-4e1c-4c0b-a5cc-e56b0830aff6', N'60123d1b-7995-470a-baeb-baa94f95bf0a', 1, CAST(1.230 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
 GO
 
-INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [IsPerpetual], [Created]) VALUES (N'123af44e-6b05-4be7-b8b4-8ffd6439d5ec', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-001', 1, CAST(0.660 AS Decimal(18, 3)), 1, NULL, 0, GetUtcDate())
+INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'123af44e-6b05-4be7-b8b4-8ffd6439d5ec', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-001', 1, CAST(0.660 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
 GO
-INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [IsPerpetual], [Created]) VALUES (N'7fe3b549-2f1b-43d5-b1d2-97c855e10fbb', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-002', 1, CAST(1.500 AS Decimal(18, 3)), 1, NULL, 0, GetUtcDate())
+INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'7fe3b549-2f1b-43d5-b1d2-97c855e10fbb', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-002', 1, CAST(1.500 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
 GO
 
 INSERT INTO [dbo].[FrameworkSolutions] ([FrameworkId] ,[SolutionId] ,[IsFoundation], [LastUpdated] ,[LastUpdatedBy]) VALUES ('NHSDGP001', '100000-001' ,1 ,GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 --********************************************************************************************************************************************************************
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy]) 
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy]) 
 	VALUES (N'100001-001', 
 			N'100001', 
-			N'3ae361b2-ea5d-46a5-bdea-b4fe0b811da8',
 			N'Appointment Gateway',
 			N'1.0.0',
 			3,
@@ -104,10 +102,9 @@ GO
 
 --********************************************************************************************************************************************************************
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100002-001', 
 			N'100002', 
-			N'83937b62-4061-4209-85d7-c0a2be981c2b',
 			N'Zen Guidance',
 			N'1.0.0',
 			3,
@@ -142,10 +139,9 @@ INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [La
 GO
 
 --********************************************************************************************************************************************************************
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100003-001', 
 			N'100003', 
-			N'8bbd7dda-63c3-46cd-8ede-3793de685114',
 			N'Intellidoc Comms',
 			N'1.0.0',
 			3,
@@ -182,10 +178,9 @@ GO
 
 --********************************************************************************************************************************************************************
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100004-001', 
 			N'100004', 
-			N'38d43113-2105-4824-8a30-0db4e7c6eb05',
 			N'Diagnostics XYZ',
 			N'1.0.0',
 			3,
@@ -225,10 +220,9 @@ GO
 --********************************************************************************************************************************************************************
 
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100005-001', 
 			N'100005', 
-			N'3b4845c3-1f65-4848-a056-9471d2a59350',
 			N'Document Wizard',
 			N'1.0.0',
 			3,
@@ -268,10 +262,9 @@ GO
 --********************************************************************************************************************************************************************
 
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100006-001', 
 			N'100006', 
-			N'd3342a7a-2e5f-411b-9323-ee9fcac37ab3',
 			N'Paperlite',
 			N'1.0.0',
 			3,
@@ -310,10 +303,9 @@ GO
 --********************************************************************************************************************************************************************
 
 
-INSERT [dbo].[Solution] ([Id], [SupplierId], [OrganisationId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'100007-001', 
 			N'100007', 
-			N'464545be-ffea-4f52-a73f-ef5c891a511b', 
 			N'Medsort',
 			N'1.0.0',
 			3,
