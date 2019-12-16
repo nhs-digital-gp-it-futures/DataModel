@@ -635,6 +635,30 @@ GO
 
 /*-----------------------------------------------------------------------
 --
+-- AdditionalServiceDetail
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[AdditionalServiceDetail](
+	[Id] [varchar](14) NOT NULL,
+	[FullDescription] [varchar](3000) NULL,
+	[LastUpdated] [datetime2](7) NOT NULL,
+	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_AdditionalServiceDetail] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AdditionalServiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServiceDetail_Solution_Id] FOREIGN KEY([Id])
+REFERENCES [dbo].[Solution] ([Id])
+GO
+
+ALTER TABLE [dbo].[AdditionalServiceDetail] CHECK CONSTRAINT [FK_AdditionalServiceDetail_Solution_Id]
+GO
+
+/*-----------------------------------------------------------------------
+--
 -- SolutionCapabilityStatus
 --
 ------------------------------------------------------------------------*/
