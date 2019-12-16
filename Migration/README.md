@@ -38,7 +38,9 @@ Destination : localhost, buyingcatalog1
 
 1. Open the script **ClearTables.sql** in Sql Server Management Studio and connect to the **Destination** database
 
-1. Open package in Visual Studio and amend connection strings as appropriate
+1. Open package in Visual Studio and amend the comnection details of the two connection managers as appropriate. 
+    1. Do this by double clicking each in turn and using the pop up wizard. 
+    1. Click Test Connection for each and then Save. Note that if this step is missed, the package will silently fail to run
 
 1. Seek a peer to review: specifically to validate that the **correct environments** are being accessed by **both ClearTables.sql and the package** and that Source and Destination are the right way round
 
@@ -52,6 +54,6 @@ Once your reviewer grants approval:
 
 1. Verify that data transfer has taken place and the Destination database has been updated
 
-1. Close Visual Studio **without** saving changes
+1. Use a git client to revert your local changes
 
-**DO NOT SAVE PRODUCTION CREDENTIALS AND DEFINITELY DO NOT COMMIT THEM TO GIT** 
+**DO NOT COMMIT PRODUCTION CREDENTIALS TO GIT** 
