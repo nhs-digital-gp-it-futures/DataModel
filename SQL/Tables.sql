@@ -987,9 +987,24 @@ GO
 CREATE TABLE [dbo].[PricingUnit](
 	[Id] [int] NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[Description] [varchar](500) NOT NULL,
-	[Consumption] [bit] NOT NULL,
+	[Description] [varchar](500) NOT NULL,	
  CONSTRAINT [PK_PricingUnit] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+/*-----------------------------------------------------------------------
+--
+-- PriceType
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[PriceType](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](35) NOT NULL,	
+ CONSTRAINT [PK_PricingType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1060,8 +1075,10 @@ GO
 CREATE TABLE [dbo].[SolutionPrice](
 	[Id] [uniqueidentifier] NOT NULL,
 	[PurchasingModelId] [uniqueidentifier] NOT NULL,
-	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 3) NOT NULL,
+	[UnitId] [int] NOT NULL,
+	[PriceTypeId] [int] NOT NULL,
+	[ConsumptionPrice] [bit] NOT NULL DEFAULT (0),
+	[Price] [decimal](18, 4) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,	
 	[Created] [datetime2](7) NOT NULL CONSTRAINT [DF_SolutionPrice_Created] DEFAULT GetUtcDate(),
@@ -1086,11 +1103,18 @@ GO
 ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PurchasingModelId]
 GO
 
-ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_PricingUnit] FOREIGN KEY([PricingUnitId])
+ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_PricingUnit] FOREIGN KEY([UnitId])
 REFERENCES [dbo].[PricingUnit] ([Id])
 GO
 
 ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PricingUnit]
+GO
+
+ALTER TABLE [dbo].[SolutionPrice]  WITH CHECK ADD  CONSTRAINT [FK_SolutionPrice_PriceType] FOREIGN KEY([PriceTypeId])
+REFERENCES [dbo].[PricingUnit] ([Id])
+GO
+
+ALTER TABLE [dbo].[SolutionPrice] CHECK CONSTRAINT [FK_SolutionPrice_PriceType]
 GO
 
 /*-----------------------------------------------------------------------
@@ -1102,8 +1126,10 @@ CREATE TABLE [dbo].[AdditionalServicePrice](
 	[Id] [uniqueidentifier] NOT NULL,
 	[PurchasingModelId] [uniqueidentifier] NOT NULL,
 	[AdditionalServiceId] [varchar](14) NOT NULL,
-	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 3) NOT NULL,
+	[UnitId] [int] NOT NULL,
+	[PriceTypeId] [int] NOT NULL,
+	[ConsumptionPrice] [bit] NOT NULL DEFAULT (0),
+	[Price] [decimal](18, 4) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,	
  CONSTRAINT [PK_AdditionalServicePrice] PRIMARY KEY NONCLUSTERED 
@@ -1127,11 +1153,18 @@ GO
 ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_PurchasingModelId]
 GO
 
-ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_PricingUnit] FOREIGN KEY([PricingUnitId])
+ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_PricingUnit] FOREIGN KEY([UnitId])
 REFERENCES [dbo].[PricingUnit] ([Id])
 GO
 
 ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_PricingUnit]
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_PriceType] FOREIGN KEY([PriceTypeId])
+REFERENCES [dbo].[PriceType] ([Id])
+GO
+
+ALTER TABLE [dbo].[AdditionalServicePrice] CHECK CONSTRAINT [FK_AdditionalServicePrice_PriceType]
 GO
 
 ALTER TABLE [dbo].[AdditionalServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AdditionalServicePrice_Soution] FOREIGN KEY([AdditionalServiceId])
@@ -1179,8 +1212,10 @@ CREATE TABLE [dbo].[AssociatedServicePrice](
 	[Id] [uniqueidentifier] NOT NULL,
 	[PurchasingModelId] [uniqueidentifier] NOT NULL,
 	[AssociatedServiceId] [varchar](18) NOT NULL,
-	[PricingUnitId] [int] NOT NULL,
-	[Price] [decimal](18, 3) NOT NULL,
+	[UnitId] [int] NOT NULL,
+	[PriceTypeId] [int] NOT NULL,
+	[ConsumptionPrice] [bit] NOT NULL DEFAULT (0),
+	[Price] [decimal](18, 4) NOT NULL,
 	[BandStart] [int] NOT NULL,
 	[BandEnd] [int] NULL,	
 	[Created] [datetime2](7) NOT NULL CONSTRAINT [DF_AssociatedServicePrice_Created] DEFAULT GetUtcDate(),
@@ -1205,13 +1240,19 @@ GO
 ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociatedServicePrice_PurchasingModelId]
 GO
 
-ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociateServicePrice_PricingUnit] FOREIGN KEY([PricingUnitId])
+ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociateServicePrice_PricingUnit] FOREIGN KEY([UnitId])
 REFERENCES [dbo].[PricingUnit] ([Id])
 GO
 
 ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociateServicePrice_PricingUnit]
 GO
 
+ALTER TABLE [dbo].[AssociatedServicePrice]  WITH CHECK ADD  CONSTRAINT [FK_AssociatedServicePrice_PriceType] FOREIGN KEY([PriceTypeId])
+REFERENCES [dbo].[PriceType] ([Id])
+GO
+
+ALTER TABLE [dbo].[AssociatedServicePrice] CHECK CONSTRAINT [FK_AssociatedServicePrice_PriceType]
+GO
 
 /*-----------------------------------------------------------------------
 --

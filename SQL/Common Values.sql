@@ -46,5 +46,11 @@ GO
 INSERT INTO [dbo].[SolutionStandardStatus] ([Id], [Name]) VALUES (1, 'Passed');
 GO
 
-INSERT [dbo].[PricingUnit] ([Id], [Name], [Description], [Consumption]) VALUES (1, N'Patient', 'Per Registered Patient', 0)
+INSERT [dbo].[PricingUnit] ([Id], [Name], [Description]) VALUES (1, N'Patient', 'Per Registered Patient')
 GO
+
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (1, N'Flat List Price')
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (2, N'Bundle Price')
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (3, N'Cumlative Triered Price')
+GO
+

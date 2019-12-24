@@ -40,12 +40,12 @@ GO
 
 INSERT [dbo].[PurchasingModel] ([Id], [FrameworkId], [SolutionId], [StatusId], [AuthorityStatusId], [LastUpdated], [LastUpdatedBy]) VALUES (N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'NHSDGP001', N'100000-001', 4, 2, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
-INSERT [dbo].[SolutionPrice] ([Id], [PurchasingModelId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'd89a6e83-4e1c-4c0b-a5cc-e56b0830aff6', N'60123d1b-7995-470a-baeb-baa94f95bf0a', 1, CAST(1.230 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
+INSERT [dbo].[SolutionPrice] ([Id], [PurchasingModelId], [UnitId], [PriceTypeId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'd89a6e83-4e1c-4c0b-a5cc-e56b0830aff6', N'60123d1b-7995-470a-baeb-baa94f95bf0a', 1, 1, CAST(1.230 AS Decimal(18, 4)), 1, NULL, GetUtcDate())
 GO
 
-INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'123af44e-6b05-4be7-b8b4-8ffd6439d5ec', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-001', 1, CAST(0.660 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
+INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [UnitId], [PriceTypeId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'123af44e-6b05-4be7-b8b4-8ffd6439d5ec', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-001', 1, 3, CAST(0.660 AS Decimal(18, 4)), 1, NULL, GetUtcDate())
 GO
-INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [PricingUnitId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'7fe3b549-2f1b-43d5-b1d2-97c855e10fbb', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-002', 1, CAST(1.500 AS Decimal(18, 3)), 1, NULL, GetUtcDate())
+INSERT [dbo].[AssociatedServicePrice] ([Id], [PurchasingModelId], [AssociatedServiceId], [UnitId], [PriceTypeId], [Price], [BandStart], [BandEnd], [Created]) VALUES (N'7fe3b549-2f1b-43d5-b1d2-97c855e10fbb', N'60123d1b-7995-470a-baeb-baa94f95bf0a', N'10000000-001-002', 1, 3, CAST(1.500 AS Decimal(18, 4)), 1, NULL, GetUtcDate())
 GO
 
 INSERT INTO [dbo].[FrameworkSolutions] ([FrameworkId] ,[SolutionId] ,[IsFoundation], [LastUpdated] ,[LastUpdatedBy]) VALUES ('NHSDGP001', '100000-001' ,1 ,GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -94,7 +94,7 @@ INSERT INTO [dbo].[FrameworkSolutions]
         ,[LastUpdatedBy])
 		VALUES
 		( N'NHSDGP001'
-		 ,N'100000-001'
+		 ,N'100001-001'
 		 ,1
 		 ,GetUtcDate()
 		 ,'00000000-0000-0000-0000-000000000000')

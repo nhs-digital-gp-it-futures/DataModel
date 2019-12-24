@@ -6,7 +6,7 @@ IF OBJECT_ID('[AdditionalServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PurchasingModelId]
-  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PricingUnitType]
+  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PriceUnit]
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_Soution]
   COMMIT
 END
@@ -22,7 +22,7 @@ IF OBJECT_ID('[AssociatedServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociatedServicePrice_PurchasingModelId]
-  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PricingUnitType]
+  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PriceUnit]
  COMMIT
 END
 
