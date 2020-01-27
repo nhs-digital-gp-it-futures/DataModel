@@ -21,7 +21,6 @@ BEGIN TRY
 	***/
 
 	DECLARE @EmptyGuid UNIQUEIDENTIFIER = 0x0
-	DECLARE @OrganisationId UNIQUEIDENTIFIER
 	DECLARE @FrameworkId varchar(10) = 'NHSDGP001'
 	DECLARE @SolutionDetailId UNIQUEIDENTIFIER
 
@@ -34,20 +33,12 @@ BEGIN TRY
 		THROW 51000, 'Supplier record does not exist.', 1;  
 
 	/***
-	Get the Organisation id
-	***/
-	SELECT @OrganisationId = OrganisationId
-	FROM [dbo].[Supplier]
-	WHERE [Id] =  @SupplierId
-
-	/***
 	Add the solution if not already present
 	***/
 	IF NOT EXISTS (SELECT 1 FROM [dbo].[Solution] WHERE [Id] =  @SolutionId)
 	INSERT INTO [dbo].[Solution]
 			   ([Id]
 			   ,[SupplierId]
-			   ,[OrganisationId]
 			   ,[SolutionDetailId]
 			   ,[Name]
 			   ,[PublishedStatusId]
@@ -59,7 +50,6 @@ BEGIN TRY
 		 VALUES
 			   (@SolutionId
 			   ,@SupplierId
-			   ,@OrganisationId
 			   ,NULL
 			   ,@SolutionName 
 			   ,1 --Draft

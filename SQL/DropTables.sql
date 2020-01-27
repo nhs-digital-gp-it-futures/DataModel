@@ -6,7 +6,7 @@ IF OBJECT_ID('[AdditionalServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PurchasingModelId]
-  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PricingUnitType]
+  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PriceUnit]
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_Soution]
   COMMIT
 END
@@ -22,7 +22,7 @@ IF OBJECT_ID('[AssociatedServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociatedServicePrice_PurchasingModelId]
-  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PricingUnitType]
+  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PriceUnit]
  COMMIT
 END
 
@@ -211,7 +211,8 @@ DROP TABLE IF EXISTS [dbo].[Solution];
 DROP TABLE IF EXISTS [dbo].[SolutionSupplierStatus];
 DROP TABLE IF EXISTS [dbo].[SolutionAuthorityStatus];
 DROP TABLE IF EXISTS [dbo].[PublicationStatus];
-DROP TABLE IF EXISTS [dbo].[OrganisationContact];
+DROP TABLE IF EXISTS [dbo].[SupplierContact];
+DROP TABLE IF EXISTS [dbo].[Supplier];
 DROP TABLE IF EXISTS [dbo].[Organisation];
 DROP TABLE IF EXISTS [dbo].[FrameworkStandards];
 DROP TABLE IF EXISTS [dbo].[FrameworkCapabilities];
@@ -227,6 +228,10 @@ DROP TABLE IF EXISTS [dbo].[CapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[CapabilityCategory];
 DROP TABLE IF EXISTS [dbo].[CompliancyLevel];
 DROP TABLE IF EXISTS [dbo].[Audit];
+DROP TABLE IF EXISTS [dbo].[AdditionalServiceDetail];
+DROP TABLE IF EXISTS [dbo].[PriceType];
+DROP TABLE IF EXISTS [dbo].[PricingUnit];
+DROP TABLE IF EXISTS [dbo].[SolutionDetail];
 
 COMMIT
 

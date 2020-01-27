@@ -24,3 +24,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+#Apple macOS operating system file
+.DS_Store
