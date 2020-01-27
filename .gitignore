@@ -3,3 +3,6 @@
 
 #Visual Studio Code
 .vscode/*
+
+#Apple macOS operating system file
+.DS_Store
