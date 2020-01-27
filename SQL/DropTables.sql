@@ -228,6 +228,10 @@ DROP TABLE IF EXISTS [dbo].[CapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[CapabilityCategory];
 DROP TABLE IF EXISTS [dbo].[CompliancyLevel];
 DROP TABLE IF EXISTS [dbo].[Audit];
+DROP TABLE IF EXISTS [dbo].[AdditionalServiceDetail];
+DROP TABLE IF EXISTS [dbo].[PriceType];
+DROP TABLE IF EXISTS [dbo].[PricingUnit];
+DROP TABLE IF EXISTS [dbo].[SolutionDetail];
 
 COMMIT
 
