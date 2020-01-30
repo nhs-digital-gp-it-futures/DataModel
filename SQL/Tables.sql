@@ -593,6 +593,7 @@ CREATE TABLE [dbo].[SolutionDetail](
 	[ImplementationDetail] [nvarchar](max) NULL,
 	[RoadMap] [varchar](1000) NULL,
 	[RoadMapImageUrl] [varchar](1000) NULL,	
+	[IntegrationsUrl] [varchar](1000) NULL,	
 	[AboutUrl] [varchar](1000) NULL,	
 	[Summary] [varchar](300) NULL,
 	[FullDescription] [varchar](3000) NULL,
