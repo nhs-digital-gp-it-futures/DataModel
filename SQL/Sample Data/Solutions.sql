@@ -11,9 +11,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy]) 
-	VALUES (N'b0b981ca-b4db-4bdc-ab05-89780cc750ec', N'100000-001', 1,			
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy]) 
+	VALUES (N'b0b981ca-b4db-4bdc-ab05-89780cc750ec', 1,
 			N'["Flexible Pricing", "Lightweight interface designed for maximum usability", "DNA tracking and automatic improvement suggestions", "Web-based", "Remotely accessible"]',
 			NULL,
 			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}',
@@ -65,8 +64,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			N'00000000-0000-0000-0000-000000000000')
 
 			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
-	VALUES (N'26b7f5d8-69d9-40b3-a450-73f714ebab5c', N'100001-001', 1,
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+	VALUES (N'26b7f5d8-69d9-40b3-a450-73f714ebab5c', 1,
 			N'["Tested and approved by hundred''s of GPs", "99.9% service availability guaranteed", "Appointment forwarding & referral integration", "Fully interopable with all major GP IT solutions", "Compliant with all relevant ISO standards"]',
 			NULL,
 			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}',
@@ -86,6 +85,7 @@ GO
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100001-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C1')
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100001-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C5')
 GO
+
 INSERT INTO [dbo].[FrameworkSolutions]
 		([FrameworkId]
         ,[SolutionId]
@@ -114,10 +114,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
-	VALUES (N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8', 
-			N'100002-001',			
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+	VALUES (N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8',
 			3,
 			N'["Advanced AI functionality", "MESH & FHIR compliant", "Remotely accessible ", "Cloud-hosted", "24/7 customer support"]',
 			NULL,
@@ -151,10 +149,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'4b0e4a4f-2327-44ac-8988-7317a59c110d',
-			N'100003-001',
 			3,
 			N'["Efficient instant & scheduled messaging", "Web-based interface", "Compliant with all relevant ISO standards", "Wide range of add-ons available", "Cloud-hosted"]',
 			NULL,
@@ -190,10 +186,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'fcd89564-bce6-45fb-8d18-3e97b6ad416b',
-			N'100004-001',			
 			3,
 			N'["Seamless integration with a wide range of diagnostic hardware", "Demo & free trial available", "FHIR compliant", "Plug and play - minimal deployment activity required", "Optimized for touchscreen & desktop use"]',
 			NULL,
@@ -232,10 +226,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'9fe7980f-0a0b-44b3-bd19-0786dd6e1f4e',
-			N'100005-001',			
 			3, 
 			N'["Industry-leading data extraction & scanning accuracy", "Fully interopable with all major GP IT solutions", "24/7 customer support", "Fully Compliant with all relevant ISO standards", "Modular architecture to enhance compatibility and customisation"]',
 			NULL,
@@ -274,10 +266,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'b6dcb30f-613d-43d7-9039-2ce4cf8508ce',
-			N'100006-001',			
 			3,
 			N'["Revolutionary optical character recognition technology", "Can be deployed quickly at low-cost", "Web-based interface", "Cloud-hosted", "Wide range of add-ons available"]',
 			NULL,
@@ -315,10 +305,8 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-			
-INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'bf543a9e-50d4-4d44-af10-59ee753915b5',
-			N'100007-001',
 			3,
 			N'["Fully adaptable to suit your practice''s needs", "Integrates with Spine", "FHIR compliant", "Flexible Pricing", "24/7 customer support"]',
 			NULL,
