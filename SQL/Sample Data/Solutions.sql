@@ -11,8 +11,10 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy]) 
-	VALUES (N'b0b981ca-b4db-4bdc-ab05-89780cc750ec', 1,
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy]) 
+	VALUES (N'b0b981ca-b4db-4bdc-ab05-89780cc750ec', 
+			N'100000-001',
+			1,
 			N'["Flexible Pricing", "Lightweight interface designed for maximum usability", "DNA tracking and automatic improvement suggestions", "Web-based", "Remotely accessible"]',
 			NULL,
 			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}',
@@ -21,9 +23,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b0b981ca-b4db-4bdc-ab05-89780cc750ec' WHERE [Id] = '100000-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100000-001', N'Patsy', N'Delgado', N'07451593188', N'Sales@remedical.co.uk', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -64,8 +63,10 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			N'00000000-0000-0000-0000-000000000000')
 
 			
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
-	VALUES (N'26b7f5d8-69d9-40b3-a450-73f714ebab5c', 1,
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+	VALUES (N'26b7f5d8-69d9-40b3-a450-73f714ebab5c', 
+			N'100001-001',
+			1,
 			N'["Tested and approved by hundred''s of GPs", "99.9% service availability guaranteed", "Appointment forwarding & referral integration", "Fully interopable with all major GP IT solutions", "Compliant with all relevant ISO standards"]',
 			NULL,
 			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}',
@@ -74,9 +75,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Appointment Gateway is a complete appointment management suite that has been fully integrated with all major clinical systems throughout both the UK and Europe.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'26b7f5d8-69d9-40b3-a450-73f714ebab5c' WHERE [Id] = '100001-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100001-001', N'Sam', N'Thomas', N'07255920626', N'Sales@CareShare.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -114,8 +112,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8',
+			N'100002-001',
 			3,
 			N'["Advanced AI functionality", "MESH & FHIR compliant", "Remotely accessible ", "Cloud-hosted", "24/7 customer support"]',
 			NULL,
@@ -125,9 +124,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Zen Guidance utilizes an advanced AI framework to provide clinicians with highly accurate data to support sound decision-making.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'de9adcc1-4b16-4052-a2e4-7b36f82fa7d8' WHERE [Id] = '100002-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100002-001', N'Virginia', N'Wilson', N'07810401180', N'Sales@Zen.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -149,8 +145,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'4b0e4a4f-2327-44ac-8988-7317a59c110d',
+			N'100003-001',
 			3,
 			N'["Efficient instant & scheduled messaging", "Web-based interface", "Compliant with all relevant ISO standards", "Wide range of add-ons available", "Cloud-hosted"]',
 			NULL,
@@ -160,9 +157,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Intellidoc Comms empowers all practice staff to record & send communications in an extremely streamlined and time-efficient manner.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'4b0e4a4f-2327-44ac-8988-7317a59c110d' WHERE [Id] = '100003-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100003-001', N'Richard', N'Perez', N'07882055950', N'Sales@CatterpillarMedworks.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -186,8 +180,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'fcd89564-bce6-45fb-8d18-3e97b6ad416b',
+			N'100004-001',
 			3,
 			N'["Seamless integration with a wide range of diagnostic hardware", "Demo & free trial available", "FHIR compliant", "Plug and play - minimal deployment activity required", "Optimized for touchscreen & desktop use"]',
 			NULL,
@@ -197,9 +192,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Diagnostics XYZ introduces new diagnostic tools not currently provided by the leading clinical software suppliers.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'fcd89564-bce6-45fb-8d18-3e97b6ad416b' WHERE [Id] = '100004-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100004-001', N'Harry', N'Gonzales', N'07219884068', N'Sales@CurtisSystems.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -226,8 +218,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'9fe7980f-0a0b-44b3-bd19-0786dd6e1f4e',
+			N'100005-001',
 			3, 
 			N'["Industry-leading data extraction & scanning accuracy", "Fully interopable with all major GP IT solutions", "24/7 customer support", "Fully Compliant with all relevant ISO standards", "Modular architecture to enhance compatibility and customisation"]',
 			NULL,
@@ -237,9 +230,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Document Wizard is the UK industry-leader for clinical document management software due to our patented lightweight interface and interoperability.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'9fe7980f-0a0b-44b3-bd19-0786dd6e1f4e' WHERE [Id] = '100005-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100005-001', N'Michelle', N'Moore', N'07849662065', N'Sales@ClinicalRaptor.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -266,8 +256,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'b6dcb30f-613d-43d7-9039-2ce4cf8508ce',
+			N'100006-001',
 			3,
 			N'["Revolutionary optical character recognition technology", "Can be deployed quickly at low-cost", "Web-based interface", "Cloud-hosted", "Wide range of add-ons available"]',
 			NULL,
@@ -277,9 +268,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Paperlite utilises new OCR technology to seamlessly transfer written notes to digital patient records.',			
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'b6dcb30f-613d-43d7-9039-2ce4cf8508ce' WHERE [Id] = '100006-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100006-001', N'Timothy', N'Campbell', N'07107924358', N'Sales@DocLightning.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
@@ -305,8 +293,9 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
 
-INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'bf543a9e-50d4-4d44-af10-59ee753915b5',
+			N'100007-001',
 			3,
 			N'["Fully adaptable to suit your practice''s needs", "Integrates with Spine", "FHIR compliant", "Flexible Pricing", "24/7 customer support"]',
 			NULL,
@@ -316,9 +305,6 @@ INSERT [dbo].[SolutionDetail] ([Id], [PublishedStatusId], [Features], [ClientApp
 			N'FULL DESCRIPTION - Medsort enhances your medicine optimisation process and introduces new, more customisable tools that can be adapted to your local environment.',
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-GO
-
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'bf543a9e-50d4-4d44-af10-59ee753915b5' WHERE [Id] = '100007-001'
 GO
 
 INSERT [dbo].[MarketingContact] ([SolutionId], [FirstName], [LastName], [PhoneNumber], [Email], [Department], [LastUpdated], [LastUpdatedBy]) VALUES (N'100007-001', N'Cheryl', N'White', N'07295044295', N'Sales@DocabilitySoftware.com', N'Sales', GetUtcDate(), '00000000-0000-0000-0000-000000000000')

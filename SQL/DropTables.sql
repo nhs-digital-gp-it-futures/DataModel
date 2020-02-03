@@ -117,9 +117,7 @@ BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_AuthorityStatus]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Parent]
-  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_PublishedStatus]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_PublicationStatus]
-  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_SolutionDetail]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Supplier]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_SupplierStatus]
   COMMIT
@@ -155,6 +153,14 @@ IF OBJECT_ID('[SolutionDefinedEpicAcceptanceCriteria]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionDefinedEpicAcceptanceCriteria] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpicAcceptanceCriteria_SolutionDefinedEpic]
+  COMMIT
+END
+
+IF OBJECT_ID('[SolutionDetail]', 'U') IS NOT NULL
+BEGIN
+  BEGIN TRANSACTION
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_Solution]
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_PublicationStatus]
   COMMIT
 END
 

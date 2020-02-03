@@ -517,48 +517,13 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- SolutionDetail
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[SolutionDetail](
-	[Id] [uniqueidentifier] NOT NULL,
-	[PublishedStatusId] [int] NOT NULL CONSTRAINT [DF_SolutionDetail_PublishedStatus] DEFAULT 1,
-	[Features] [nvarchar](max) NULL,
-	[ClientApplication] [nvarchar](max) NULL,
-	[Hosting] [nvarchar](max) NULL,
-	[ImplementationDetail] [nvarchar](max) NULL,
-	[RoadMap] [varchar](1000) NULL,
-	[RoadMapImageUrl] [varchar](1000) NULL,	
-	[IntegrationsUrl] [varchar](1000) NULL,	
-	[AboutUrl] [varchar](1000) NULL,	
-	[Summary] [varchar](300) NULL,
-	[FullDescription] [varchar](3000) NULL,
-	[LastUpdated] [datetime2](7) NOT NULL,
-	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_SolutionDetail] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[SolutionDetail]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDetail_PublicationStatus] FOREIGN KEY([PublishedStatusId])
-REFERENCES [dbo].[PublicationStatus] ([Id])
-GO
-
-ALTER TABLE [dbo].[SolutionDetail] CHECK CONSTRAINT [FK_SolutionDetail_PublicationStatus]
-GO
-
-/*-----------------------------------------------------------------------
---
 -- Solution
 --
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[Solution](
 	[Id] [varchar](14) NOT NULL,
 	[ParentId] [varchar](14) NULL,	
-	[SupplierId] [varchar](6) NOT NULL,	
-	[SolutionDetailId] [uniqueidentifier] NULL,	
+	[SupplierId] [varchar](6) NOT NULL,
 	[Name] [varchar](255) NOT NULL,
 	[Version] [varchar](10) NULL,
 	[PublishedStatusId] [int] NOT NULL CONSTRAINT [DF_Solution_PublishedStatus] DEFAULT 1,
@@ -611,9 +576,47 @@ GO
 ALTER TABLE [dbo].[Solution] CHECK CONSTRAINT [FK_Solution_SupplierStatus]
 GO
 
-ALTER TABLE [dbo].[Solution]  WITH CHECK ADD  CONSTRAINT [FK_Solution_SolutionDetail] FOREIGN KEY([SolutionDetailId])
-REFERENCES [dbo].[SolutionDetail] ([Id])
+/*-----------------------------------------------------------------------
+--
+-- SolutionDetail
+--
+------------------------------------------------------------------------*/
+CREATE TABLE [dbo].[SolutionDetail](
+	[Id] [uniqueidentifier] NOT NULL,
+	[SolutionId] [varchar](14) NOT NULL,
+	[PublishedStatusId] [int] NOT NULL CONSTRAINT [DF_SolutionDetail_PublishedStatus] DEFAULT 1,
+	[Features] [nvarchar](max) NULL,
+	[ClientApplication] [nvarchar](max) NULL,
+	[Hosting] [nvarchar](max) NULL,
+	[ImplementationDetail] [nvarchar](max) NULL,
+	[RoadMap] [varchar](1000) NULL,
+	[RoadMapImageUrl] [varchar](1000) NULL,	
+	[IntegrationsUrl] [varchar](1000) NULL,	
+	[AboutUrl] [varchar](1000) NULL,	
+	[Summary] [varchar](300) NULL,
+	[FullDescription] [varchar](3000) NULL,
+	[LastUpdated] [datetime2](7) NOT NULL,
+	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_SolutionDetail] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SolutionDetail]  WITH CHECK ADD CONSTRAINT [FK_SolutionDetail_Solution] FOREIGN KEY([SolutionId])
+REFERENCES [dbo].[Solution] ([Id])
 ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[SolutionDetail] CHECK CONSTRAINT [FK_SolutionDetail_Solution]
+GO
+
+ALTER TABLE [dbo].[SolutionDetail]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDetail_PublicationStatus] FOREIGN KEY([PublishedStatusId])
+REFERENCES [dbo].[PublicationStatus] ([Id])
+GO
+
+ALTER TABLE [dbo].[SolutionDetail] CHECK CONSTRAINT [FK_SolutionDetail_PublicationStatus]
 GO
 
 /*-----------------------------------------------------------------------
