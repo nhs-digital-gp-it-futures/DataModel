@@ -115,8 +115,12 @@ END
 IF OBJECT_ID('[Solution]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
-  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Organisation]
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_AuthorityStatus]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Parent]
+
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_PublicationStatus]
+
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Supplier]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_SupplierStatus]
   COMMIT
 END
@@ -151,6 +155,14 @@ IF OBJECT_ID('[SolutionDefinedEpicAcceptanceCriteria]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionDefinedEpicAcceptanceCriteria] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpicAcceptanceCriteria_SolutionDefinedEpic]
+  COMMIT
+END
+
+IF OBJECT_ID('[SolutionDetail]', 'U') IS NOT NULL
+BEGIN
+  BEGIN TRANSACTION
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_Solution]
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_PublicationStatus]
   COMMIT
 END
 
@@ -195,7 +207,6 @@ DROP TABLE IF EXISTS [dbo].[AssociatedServicePrice];
 DROP TABLE IF EXISTS [dbo].[AssociatedService];
 DROP TABLE IF EXISTS [dbo].[AdditionalServicePrice];
 DROP TABLE IF EXISTS [dbo].[SolutionPrice];
-DROP TABLE IF EXISTS [dbo].[PurchasingModel];
 DROP TABLE IF EXISTS [dbo].[PricingUnitType];
 DROP TABLE IF EXISTS [dbo].[SolutionDefinedEpicAcceptanceCriteria];
 DROP TABLE IF EXISTS [dbo].[SolutionDefinedEpic];
@@ -207,10 +218,8 @@ DROP TABLE IF EXISTS [dbo].[SolutionEpicStatus];
 DROP TABLE IF EXISTS [dbo].[SolutionCapability];
 DROP TABLE IF EXISTS [dbo].[SolutionCapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[MarketingDetail];
-DROP TABLE IF EXISTS [dbo].[Solution];
 DROP TABLE IF EXISTS [dbo].[SolutionSupplierStatus];
 DROP TABLE IF EXISTS [dbo].[SolutionAuthorityStatus];
-DROP TABLE IF EXISTS [dbo].[PublicationStatus];
 DROP TABLE IF EXISTS [dbo].[SupplierContact];
 DROP TABLE IF EXISTS [dbo].[Supplier];
 DROP TABLE IF EXISTS [dbo].[Organisation];
@@ -232,6 +241,8 @@ DROP TABLE IF EXISTS [dbo].[AdditionalServiceDetail];
 DROP TABLE IF EXISTS [dbo].[PriceType];
 DROP TABLE IF EXISTS [dbo].[PricingUnit];
 DROP TABLE IF EXISTS [dbo].[SolutionDetail];
+DROP TABLE IF EXISTS [dbo].[Solution];
+DROP TABLE IF EXISTS [dbo].[PurchasingModel];
+DROP TABLE IF EXISTS [dbo].[PublicationStatus];
 
 COMMIT
-
