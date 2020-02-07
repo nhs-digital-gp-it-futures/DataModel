@@ -8,41 +8,14 @@
   DTS:Description="SSIS Package Description"
   DTS:DTSID="{41CBBF9B-528A-4586-9D42-96AB51BD09B0}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1900.80"
+  DTS:LastModifiedProductVersion="15.0.2000.71"
   DTS:LocaleID="2057"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="PublishAll"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{F574C1C9-30F1-4958-A891-8545D4582FC5}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{00422311-76C1-4165-A354-2BA537A1E75B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-      DTS:DTSID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}"
-      DTS:ObjectName="DestinationConnectionAdoNET">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue1;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[SourceConnectionAdoNET]"
-      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-      DTS:DTSID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}"
-      DTS:ObjectName="SourceConnectionAdoNET">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAFrZ18QXHQ0es1oLmzYVDtQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADkXInB4evNkMBccXAKR526AAAAAASAAACgAAAAEAAAAGoa/e9lS4mGusnHPYKmn4YIAAAAip/A176sc3QUAAAAPBMAXN4w6Wwigr1V+k+qbxmpyqA</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -97,8 +70,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Destination - Solution.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -130,12 +103,6 @@
                       cachedName="SupplierId"
                       externalMetadataColumnId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].ExternalColumns[SupplierId]"
                       lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[SupplierId]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].Columns[OrganisationId]"
-                      cachedDataType="guid"
-                      cachedName="OrganisationId"
-                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].ExternalColumns[OrganisationId]"
-                      lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[OrganisationId]" />
                     <inputColumn
                       refId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].Columns[SolutionDetailId]"
                       cachedDataType="guid"
@@ -224,10 +191,6 @@
                       dataType="wstr"
                       length="6"
                       name="SupplierId" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].ExternalColumns[OrganisationId]"
-                      dataType="guid"
-                      name="OrganisationId" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination - Solution.Inputs[Destination Input].ExternalColumns[SolutionDetailId]"
                       dataType="guid"
@@ -341,8 +304,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -403,13 +366,6 @@
                       cachedName="RoadMap"
                       externalMetadataColumnId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[RoadMap]"
                       lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[RoadMap]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].Columns[RoadMapImageUrl]"
-                      cachedDataType="wstr"
-                      cachedLength="1000"
-                      cachedName="RoadMapImageUrl"
-                      externalMetadataColumnId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[RoadMapImageUrl]"
-                      lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[RoadMapImageUrl]" />
                     <inputColumn
                       refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].Columns[AboutUrl]"
                       cachedDataType="wstr"
@@ -478,7 +434,7 @@
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[ImplementationDetail]"
                       dataType="wstr"
-                      length="2147483647"
+                      length="1000"
                       name="ImplementationDetail" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[RoadMap]"
@@ -486,10 +442,10 @@
                       length="1000"
                       name="RoadMap" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[RoadMapImageUrl]"
+                      refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[IntegrationsUrl]"
                       dataType="wstr"
                       length="1000"
-                      name="RoadMapImageUrl" />
+                      name="IntegrationsUrl" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 1 - SolutionDetail.Inputs[Destination Input].ExternalColumns[AboutUrl]"
                       dataType="wstr"
@@ -578,8 +534,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Destination 2 - SolutionCapability.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -711,8 +667,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Destination 3 - PurchasingModel.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -876,8 +832,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Destination 4 - MarketingContact.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -1063,8 +1019,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Source - Solution.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -1102,15 +1058,6 @@
                       length="6"
                       lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[SupplierId]"
                       name="SupplierId"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[OrganisationId]"
-                      dataType="guid"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].ExternalColumns[OrganisationId]"
-                      lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[OrganisationId]"
-                      name="OrganisationId"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].Columns[SolutionDetailId]"
@@ -1234,10 +1181,6 @@
                       length="6"
                       name="SupplierId" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].ExternalColumns[OrganisationId]"
-                      dataType="guid"
-                      name="OrganisationId" />
-                    <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Output].ExternalColumns[SolutionDetailId]"
                       dataType="guid"
                       name="SolutionDetailId" />
@@ -1310,11 +1253,6 @@
                       length="6"
                       lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Error Output].Columns[SupplierId]"
                       name="SupplierId" />
-                    <outputColumn
-                      refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Error Output].Columns[OrganisationId]"
-                      dataType="guid"
-                      lineageId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Error Output].Columns[OrganisationId]"
-                      name="OrganisationId" />
                     <outputColumn
                       refId="Package\Data Flow Task 1\Source - Solution.Outputs[ADO NET Source Error Output].Columns[SolutionDetailId]"
                       dataType="guid"
@@ -1432,8 +1370,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -1515,16 +1453,6 @@
                       length="1000"
                       lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[RoadMap]"
                       name="RoadMap"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[RoadMapImageUrl]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].ExternalColumns[RoadMapImageUrl]"
-                      length="1000"
-                      lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[RoadMapImageUrl]"
-                      name="RoadMapImageUrl"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].Columns[AboutUrl]"
@@ -1613,11 +1541,6 @@
                       length="1000"
                       name="RoadMap" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].ExternalColumns[RoadMapImageUrl]"
-                      dataType="wstr"
-                      length="1000"
-                      name="RoadMapImageUrl" />
-                    <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Output].ExternalColumns[AboutUrl]"
                       dataType="wstr"
                       length="1000"
@@ -1690,12 +1613,6 @@
                       length="1000"
                       lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Error Output].Columns[RoadMap]"
                       name="RoadMap" />
-                    <outputColumn
-                      refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Error Output].Columns[RoadMapImageUrl]"
-                      dataType="wstr"
-                      length="1000"
-                      lineageId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Error Output].Columns[RoadMapImageUrl]"
-                      name="RoadMapImageUrl" />
                     <outputColumn
                       refId="Package\Data Flow Task 1\Source 1 - SolutionDetail.Outputs[ADO NET Source Error Output].Columns[AboutUrl]"
                       dataType="wstr"
@@ -1783,8 +1700,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Source 2 - SolutionCapability.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -1957,8 +1874,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Source 3 - PurchasingModel.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2188,8 +2105,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 1\Source 4 - MarketingContact.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2491,8 +2408,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 2\Destination 5 - FrameworkSolutions.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionAdoNET]"
+                  connectionManagerID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DestinationConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2630,8 +2547,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task 2\Source 5 - FrameworkSolutions.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SourceConnectionAdoNET]"
-                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionAdoNET]"
+                  connectionManagerID="{78F2511D-6302-4CBB-BA3F-E846781DC61D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SourceConnectionAdoNET]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2839,9 +2756,9 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="221,42"
-          Id="Package\Data Flow Task 1\Source 2 - SolutionCapability"
-          TopLeft="15.5,5.5" />
+          Size="238,42"
+          Id="Package\Data Flow Task 1\Destination 3 - PurchasingModel"
+          TopLeft="889,107.5" />
         <NodeLayout
           Size="241,42"
           Id="Package\Data Flow Task 1\Destination 2 - SolutionCapability"
@@ -2855,73 +2772,29 @@
           Id="Package\Data Flow Task 1\Destination 4 - MarketingContact"
           TopLeft="589.5,107.5" />
         <NodeLayout
+          Size="221,42"
+          Id="Package\Data Flow Task 1\Source 2 - SolutionCapability"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
           Size="219,42"
           Id="Package\Data Flow Task 1\Source 4 - MarketingContact"
           TopLeft="599.5,5.5" />
-        <NodeLayout
-          Size="221,42"
-          Id="Package\Data Flow Task 1\Destination 1 - SolutionDetail"
-          TopLeft="307.5,107.5" />
-        <NodeLayout
-          Size="218,42"
-          Id="Package\Data Flow Task 1\Source 3 - PurchasingModel"
-          TopLeft="899,5.49999999999989" />
         <NodeLayout
           Size="163,42"
           Id="Package\Data Flow Task 1\Source - Solution"
           TopLeft="1198.5,5.49999999999989" />
         <NodeLayout
+          Size="218,42"
+          Id="Package\Data Flow Task 1\Source 3 - PurchasingModel"
+          TopLeft="899,5.49999999999989" />
+        <NodeLayout
           Size="184,42"
           Id="Package\Data Flow Task 1\Destination - Solution"
           TopLeft="1188,107.5" />
         <NodeLayout
-          Size="238,42"
-          Id="Package\Data Flow Task 1\Destination 3 - PurchasingModel"
-          TopLeft="889,107.5" />
-        <EdgeLayout
-          Id="Package\Data Flow Task 1.Paths[ADO NET Source Output1]"
-          TopLeft="418,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task 1.Paths[ADO NET Source Output]"
-          TopLeft="1280,47.4999999999999">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="221,42"
+          Id="Package\Data Flow Task 1\Destination 1 - SolutionDetail"
+          TopLeft="307.5,107.5" />
         <EdgeLayout
           Id="Package\Data Flow Task 1.Paths[ADO NET Source Output4]"
           TopLeft="709,47.5">
@@ -2988,9 +2861,77 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[ADO NET Source Output1]"
+          TopLeft="418,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[ADO NET Source Output]"
+          TopLeft="1280,47.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Source 2 - SolutionCapability">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Destination - Solution">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Destination 1 - SolutionDetail">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Data Flow Task 2">
     <LayoutInfo>
