@@ -113,8 +113,7 @@ GO
 --
 ------------------------------------------------------------------------*/
 CREATE TABLE [dbo].[Epic](
-	[Id] [uniqueidentifier] NOT NULL,
-	[EpicRef] [varchar](16) NOT NULL,
+	[Id] [varchar](10) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
 	[CapabilityId] [uniqueidentifier] NOT NULL,
 	[SourceUrl] [varchar](max) NULL,
@@ -124,12 +123,6 @@ CREATE TABLE [dbo].[Epic](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-CREATE CLUSTERED INDEX [IX_EpicEpicRef] ON [dbo].[Epic]
-(
-	[EpicRef] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Epic]  WITH CHECK ADD  CONSTRAINT [FK_Epic_Capability] FOREIGN KEY([CapabilityId])
