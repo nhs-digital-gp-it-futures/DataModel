@@ -13,15 +13,10 @@ GO
 INSERT INTO [dbo].[CapabilityCategory] ([Id], [Name]) VALUES (0, 'Undefined');
 GO
 
-INSERT INTO [dbo].[EpicCategory] ([Id], [Name]) VALUES (0, 'Undefined');
-GO
-
-
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (1, 'MUST');
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (2, 'SHOULD');
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (3, 'MAY');
 GO
-
 
 INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (1, 'Draft');
 INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (2, 'Unpublished');

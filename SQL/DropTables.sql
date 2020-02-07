@@ -48,7 +48,6 @@ IF OBJECT_ID('[Epic]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [Epic] DROP CONSTRAINT IF EXISTS [FK_Epic_Capability]
-  ALTER TABLE [Epic] DROP CONSTRAINT IF EXISTS [FK_Epic_EpicCategory]
   ALTER TABLE [Epic] DROP CONSTRAINT IF EXISTS [FK_Epic_CompliancyLevel]
   COMMIT
 END
@@ -141,7 +140,6 @@ IF OBJECT_ID('[SolutionDefinedEpic]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_SolutionEpicStatus]
-  ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_EpicCategory]
   ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_SolutionDefinedCapability]
   COMMIT
 END

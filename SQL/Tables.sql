@@ -716,7 +716,7 @@ GO
 CREATE TABLE [dbo].[SolutionEpic](
 	[SolutionId] [varchar](14) NOT NULL,
 	[CapabilityId] [uniqueidentifier] NOT NULL,
-	[EpicId] [uniqueidentifier] NOT NULL,
+	[EpicId] [varchar](10) NOT NULL,
 	[StatusId] [int] NOT NULL,
 	[LastUpdated] [datetime2](7) NOT NULL,
 	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
