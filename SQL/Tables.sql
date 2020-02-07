@@ -109,25 +109,6 @@ GO
 
 /*-----------------------------------------------------------------------
 --
--- EpicCategory
---
-------------------------------------------------------------------------*/
-CREATE TABLE [dbo].[EpicCategory](
-	[Id] [int] NOT NULL,
-	[Name] [varchar](16) NOT NULL,
- CONSTRAINT [PK_EpicCategory] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
- CONSTRAINT [IX_EpicCategoryStatusName] UNIQUE NONCLUSTERED 
-(
-	[Name] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-/*-----------------------------------------------------------------------
---
 -- Epic
 --
 ------------------------------------------------------------------------*/
@@ -137,7 +118,6 @@ CREATE TABLE [dbo].[Epic](
 	[Name] [varchar](100) NOT NULL,
 	[CapabilityId] [uniqueidentifier] NOT NULL,
 	[SourceUrl] [varchar](max) NULL,
-	[CategoryId] [int],
 	[CompliancyLevelId] [int],
  CONSTRAINT [PK_Epic] PRIMARY KEY NONCLUSTERED 
 (
@@ -157,13 +137,6 @@ REFERENCES [dbo].[Capability] ([Id])
 GO
 
 ALTER TABLE [dbo].[Epic] CHECK CONSTRAINT [FK_Epic_Capability]
-GO
-
-ALTER TABLE [dbo].[Epic]  WITH CHECK ADD  CONSTRAINT [FK_Epic_EpicCategory] FOREIGN KEY([CategoryId])
-REFERENCES [dbo].[EpicCategory] ([Id])
-GO
-
-ALTER TABLE [dbo].[Epic] CHECK CONSTRAINT [FK_Epic_EpicCategory]
 GO
 
 ALTER TABLE [dbo].[Epic]  WITH CHECK ADD  CONSTRAINT [FK_Epic_CompliancyLevel] FOREIGN KEY([CompliancyLevelId])
@@ -909,7 +882,6 @@ CREATE TABLE [dbo].[SolutionDefinedEpic](
 	[Name] [varchar](100) NOT NULL,
 	[Description] [varchar](3000) NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[CategoryId] [int] NOT NULL,
 	[LastUpdated] [datetime2](7) NOT NULL,
 	[LastUpdatedBy] [uniqueidentifier] NOT NULL,
  CONSTRAINT [PK_SolutionDefinedEpic] PRIMARY KEY NONCLUSTERED 
@@ -930,13 +902,6 @@ REFERENCES [dbo].[SolutionEpicStatus] ([Id])
 GO
 
 ALTER TABLE [dbo].[SolutionDefinedEpic] CHECK CONSTRAINT [FK_SolutionDefinedEpic_SolutionEpicStatus]
-GO
-
-ALTER TABLE [dbo].[SolutionDefinedEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpic_EpicCategory] FOREIGN KEY([CategoryId])
-REFERENCES [dbo].[EpicCategory] ([Id])
-GO
-
-ALTER TABLE [dbo].[SolutionDefinedEpic] CHECK CONSTRAINT [FK_SolutionDefinedEpic_EpicCategory]
 GO
 
 ALTER TABLE [dbo].[SolutionDefinedEpic]  WITH CHECK ADD  CONSTRAINT [FK_SolutionDefinedEpic_SolutionDefinedCapability] FOREIGN KEY([SolutionDefinedCapabilityId])
