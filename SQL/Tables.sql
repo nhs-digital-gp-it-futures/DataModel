@@ -118,6 +118,7 @@ CREATE TABLE [dbo].[Epic](
 	[CapabilityId] [uniqueidentifier] NOT NULL,
 	[SourceUrl] [varchar](max) NULL,
 	[CompliancyLevelId] [int],
+	[Active] [bit] NOT NULL,
  CONSTRAINT [PK_Epic] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
