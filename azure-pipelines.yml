@@ -1,0 +1,14 @@
+pool:
+  name: GP IT Futures AKS Build Agents
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)\scripts'
+  inputs:
+    SourceFolder: SQL
+    TargetFolder: '$(build.artifactstagingdirectory)\scripts'
+    CleanTargetFolder: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: scripts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)\scripts'
