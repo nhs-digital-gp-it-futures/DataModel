@@ -1,19 +1,13 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- master
-
 pool:
-  vmImage: 'ubuntu-latest'
-
+  name: GP IT Futures AKS Build Agents
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)\scripts'
+  inputs:
+    SourceFolder: SQL
+    TargetFolder: '$(build.artifactstagingdirectory)\scripts'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: scripts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)\scripts'
