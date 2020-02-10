@@ -6,6 +6,7 @@ steps:
   inputs:
     SourceFolder: SQL
     TargetFolder: '$(build.artifactstagingdirectory)\scripts'
+    CleanTargetFolder: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: scripts'
