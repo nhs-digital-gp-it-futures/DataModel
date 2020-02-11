@@ -49,3 +49,6 @@ INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (2, N'Bundle Price')
 INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (3, N'Cumlative Triered Price')
 GO
 
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (1, 'Passed', 1)
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (2, 'Not Evidenced', 0)
+GO
