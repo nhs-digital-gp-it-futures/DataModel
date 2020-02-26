@@ -51,4 +51,5 @@ GO
 
 INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (1, 'Passed', 1)
 INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (2, 'Not Evidenced', 0)
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (3, 'Failed', 0)
 GO
