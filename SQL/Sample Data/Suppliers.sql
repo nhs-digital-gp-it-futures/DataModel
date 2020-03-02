@@ -1,4 +1,4 @@
-﻿INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [address], [LastUpdated], [LastUpdatedBy]) 
+INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [address], [LastUpdated], [LastUpdatedBy]) 
 	VALUES (N'100000', N'Really Kool Corporation',
 			N'Really Kool Corporation', N'Really Kool Corporation is a fictious UK based IT company but that''s not going to stop us making Really Kool products!',
 			N'{"line1": "The Tower", "line2": "High Street", "city": "Leeds", "county": "West Yorkshire", "postcode": "LS1 1BB", "country": "UK"}',
