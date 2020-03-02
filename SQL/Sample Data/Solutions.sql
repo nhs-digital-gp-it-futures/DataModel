@@ -339,3 +339,40 @@ GO
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '100007-001', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C30')
 GO
 
+--********************************************************************************************************************************************************************
+
+INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatusId], [AuthorityStatusId], [SupplierStatusId], [OnCatalogueVersion], [LastUpdated], [LastUpdatedBy])  
+	VALUES (N'99999-89', 
+			N'99999', 
+			N'NotEmis Web GP',
+			N'1.0.0',
+			3,
+			1,
+			1,
+			0,
+			GetUtcDate(),
+			'00000000-0000-0000-0000-000000000000')
+
+			
+INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
+	VALUES (N'0d5f88ef-b2ed-4e8d-966c-52e7ca3e841b',
+			N'100006-001',			
+			3,
+			N'["Revolutionary optical character recognition technology", "Can be deployed quickly at low-cost", "Web-based interface", "Cloud-hosted", "Wide range of add-ons available"]',
+			NULL,
+			N'{"hosting":{"publicCloud":{"summary":"Summary description","urlLink":"External URL link","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"privateCloud":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"hybrid":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"},"onPremise":{"summary":"Summary description","urlLink":"External URL link","hostingOverview":"Hosting environment description","hscnN3AccessRequired":"Link to HSCN or N3 network required to access service"}}}',
+			N'http://www.paperlite.com/about',
+			N'Paperlite utilises new OCR technology to seamlessly transfer written notes to digital patient records.',			
+			N'FULL DESCRIPTION - Paperlite utilises new OCR technology to seamlessly transfer written notes to digital patient records.',			
+			GetUtcDate(),
+			'00000000-0000-0000-0000-000000000000')
+GO
+
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'0d5f88ef-b2ed-4e8d-966c-52e7ca3e841b' WHERE [Id] = '99999-89'
+GO
+
+INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '99999-89', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C1')
+GO
+
+INSERT INTO [dbo].[FrameworkSolutions] ([FrameworkId] ,[SolutionId] ,[IsFoundation], [LastUpdated] ,[LastUpdatedBy]) VALUES ('NHSDGP001', '99999-89' , 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+GO
