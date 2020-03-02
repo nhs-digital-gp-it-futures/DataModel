@@ -352,15 +352,14 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			0,
 			GetUtcDate(),
 			'00000000-0000-0000-0000-000000000000')
-
 			
 INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
 	VALUES (N'0d5f88ef-b2ed-4e8d-966c-52e7ca3e841b',
-			N'100006-001',			
+			N'99999-89',			
 			3,
 			NULL,
 			NULL,
-			NULL
+			NULL,
 			NULL,
 			NULL,			
 			NULL,			
