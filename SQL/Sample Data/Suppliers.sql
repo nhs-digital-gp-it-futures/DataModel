@@ -92,3 +92,7 @@ GO
 INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [LastUpdated], [LastUpdatedBy]) 
 	VALUES (N'99999', N'NotEmis Health', N'NotEgton Medical Information Systems', NULL, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
+
+INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [LastUpdated], [LastUpdatedBy]) 
+	VALUES (N'99998', N'NotTPP', N'NotThe Phoenix Partnership', NULL, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+GO
