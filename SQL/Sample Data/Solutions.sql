@@ -391,7 +391,7 @@ INSERT [dbo].[Solution] ([Id], [SupplierId], [Name], [Version], [PublishedStatus
 			'00000000-0000-0000-0000-000000000000')
 			
 INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Features], [ClientApplication], [Hosting], [AboutUrl], [Summary], [FullDescription], [LastUpdated], [LastUpdatedBy])  
-	VALUES (N'0d5f88ef-b2ed-4e8d-966c-52e7ca3e841b',
+	VALUES (N'c9945761-4209-49fd-abef-f6f5b14f0a78',
 			N'99998-98',			
 			3,
 			NULL,
@@ -404,7 +404,7 @@ INSERT [dbo].[SolutionDetail] ([Id], [SolutionId], [PublishedStatusId], [Feature
 			'00000000-0000-0000-0000-000000000000')
 GO
 
-UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'0d5f88ef-b2ed-4e8d-966c-52e7ca3e841b' WHERE [Id] = '99998-98'
+UPDATE [dbo].[Solution] SET [SolutionDetailId] = N'c9945761-4209-49fd-abef-f6f5b14f0a78' WHERE [Id] = '99998-98'
 GO
 
 INSERT [dbo].[SolutionCapability] ([SolutionId], [CapabilityId], [StatusId], [LastUpdated], [LastUpdatedBy]) (SELECT '99998-98', Id, 1, GetUtcDate(), '00000000-0000-0000-0000-000000000000' FROM  Capability WHERE CapabilityRef = 'C1')
