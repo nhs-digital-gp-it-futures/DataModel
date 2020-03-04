@@ -89,10 +89,22 @@ INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [LastUpdated], [L
 	VALUES (N'100020', N'Oakwood', N'Oakwood Ltd', N'Oakwood', GetUtcDate(), '00000000-0000-0000-0000-000000000000')
 GO
 
-INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [LastUpdated], [LastUpdatedBy]) 
-	VALUES (N'99999', N'NotEmis Health', N'NotEgton Medical Information Systems', NULL, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [SupplierUrl], [LastUpdated], [LastUpdatedBy]) 
+VALUES (N'99999', N'NotEmis Health', N'NotEgton Medical Information Systems', 
+N'We are the UK leader in connected healthcare software & services. Through innovative IT we help healthcare professionals access the information they need to provide better, faster and more cost effective patient care.
+
+Our clinical software is used in all major healthcare settings from GP surgeries to pharmacies, community, hospitals, and specialist services. By providing innovative, integrated solutions, we’re working to break the boundaries of system integration & interoperability. 
+
+We also specialise in supplying IT infrastructure, software and engineering services, and through our technical support teams we have the skills and knowledge to enhance your IT systems.
+
+Patient (www.patient.info) is the UK’s leading health website. Designed to help patients play a key role in their own care, it provides access to clinically authored health information leaflets, videos, health check and assessment tools and patient forums. 
+
+TRUNCATED FOR DEMO', N'www.emishealth.com', GetUtcDate(), N'00000000-0000-0000-0000-000000000000')
 GO
 
-INSERT [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [LastUpdated], [LastUpdatedBy]) 
-	VALUES (N'99998', N'NotTPP', N'NotThe Phoenix Partnership', NULL, GetUtcDate(), '00000000-0000-0000-0000-000000000000')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [LegalName], [Summary], [SupplierUrl], [LastUpdated], [LastUpdatedBy]) 
+VALUES (N'99998', N'NotTPP', N'NotThe Phoenix Partnership', 
+N'TPP is a digital health company, committed to delivering world-class healthcare software around the world. Its EHR product, SystmOne, is used by over 7,000 NHS organisations in over 25 different care settings. This includes significant deployments in Acute Hospitals, Emergency Departments, Mental Health services, Social Care services and General Practice. In recent years, TPP has increased its international presence, with live deployments in China and across the Middle East.', 
+N'https://www.tpp-uk.com/', GetUtcDate(), N'00000000-0000-0000-0000-000000000000')
 GO
+
