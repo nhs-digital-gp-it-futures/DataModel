@@ -13,15 +13,10 @@ GO
 INSERT INTO [dbo].[CapabilityCategory] ([Id], [Name]) VALUES (0, 'Undefined');
 GO
 
-INSERT INTO [dbo].[EpicCategory] ([Id], [Name]) VALUES (0, 'Undefined');
-GO
-
-
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (1, 'MUST');
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (2, 'SHOULD');
 INSERT INTO [dbo].[CompliancyLevel] ([Id], [Name]) VALUES (3, 'MAY');
 GO
-
 
 INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (1, 'Draft');
 INSERT INTO [dbo].[PublicationStatus] ([Id], [Name]) VALUES (2, 'Unpublished');
@@ -47,4 +42,14 @@ INSERT INTO [dbo].[SolutionStandardStatus] ([Id], [Name]) VALUES (1, 'Passed');
 GO
 
 INSERT [dbo].[PricingUnit] ([Id], [Name], [Description]) VALUES (1, N'Patient', 'Per Registered Patient')
+GO
+
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (1, N'Flat List Price')
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (2, N'Bundle Price')
+INSERT [dbo].[PriceType] ([Id], [Name]) VALUES (3, N'Cumlative Triered Price')
+GO
+
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (1, 'Passed', 1)
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (2, 'Not Evidenced', 0)
+INSERT [dbo].[SolutionEpicStatus] ([Id], [Name], [IsMet]) VALUES (3, 'Failed', 0)
 GO

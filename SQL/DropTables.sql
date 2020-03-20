@@ -6,7 +6,8 @@ IF OBJECT_ID('[AdditionalServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PurchasingModelId]
-  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PricingUnitType]
+  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PriceUnit]
+  ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_PriceType]
   ALTER TABLE [AdditionalServicePrice] DROP CONSTRAINT IF EXISTS [FK_AdditionalServicePrice_Soution]
   COMMIT
 END
@@ -22,7 +23,8 @@ IF OBJECT_ID('[AssociatedServicePrice]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociatedServicePrice_PurchasingModelId]
-  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PricingUnitType]
+  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociateServicePrice_PriceUnit]
+  ALTER TABLE [AssociatedServicePrice] DROP CONSTRAINT IF EXISTS [FK_AssociatedServicePrice_PriceType]
  COMMIT
 END
 
@@ -30,6 +32,7 @@ IF OBJECT_ID('[Capability]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [Capability] DROP CONSTRAINT IF EXISTS [FK_Capability_CapabilityStatus]
+  ALTER TABLE [Capability] DROP CONSTRAINT IF EXISTS [FK_Capability_CapabilityCategory]
   COMMIT
 END
 
@@ -49,18 +52,10 @@ BEGIN
   COMMIT
 END
 
-IF OBJECT_ID('[FoundationSet]', 'U') IS NOT NULL
-BEGIN
-  BEGIN TRANSACTION
-  ALTER TABLE [FoundationSet] DROP CONSTRAINT IF EXISTS [FK_FoundationSet_Framework]
-  ALTER TABLE [FoundationSet] DROP CONSTRAINT IF EXISTS [FK_FoundationSet_Solution]
-  COMMIT
-END
-
 IF OBJECT_ID('[FrameworkCapabilities]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
-  ALTER TABLE [FrameworkCapabilities] DROP CONSTRAINT IF EXISTS [FK_FrameworkCapabilities_Framework]
+  ALTER TABLE [FrameworkCapabilities] DROP CONSTRAINT IF EXISTS [FK_FrameworkCapabilities_Capability]
   ALTER TABLE [FrameworkCapabilities] DROP CONSTRAINT IF EXISTS [FK_FrameworkCapabilities_Framework]
   COMMIT
 END
@@ -115,9 +110,12 @@ END
 IF OBJECT_ID('[Solution]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
-  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Organisation]
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_AuthorityStatus]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Parent]
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_PublicationStatus]
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_Supplier]
   ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_SupplierStatus]
+  ALTER TABLE [Solution] DROP CONSTRAINT IF EXISTS [FK_Solution_SolutionDetail]
   COMMIT
 END
 
@@ -142,7 +140,6 @@ IF OBJECT_ID('[SolutionDefinedEpic]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_SolutionEpicStatus]
-  ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_EpicCategory]
   ALTER TABLE [SolutionDefinedEpic] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpic_SolutionDefinedCapability]
   COMMIT
 END
@@ -151,6 +148,14 @@ IF OBJECT_ID('[SolutionDefinedEpicAcceptanceCriteria]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionDefinedEpicAcceptanceCriteria] DROP CONSTRAINT IF EXISTS [FK_SolutionDefinedEpicAcceptanceCriteria_SolutionDefinedEpic]
+  COMMIT
+END
+
+IF OBJECT_ID('[SolutionDetail]', 'U') IS NOT NULL
+BEGIN
+  BEGIN TRANSACTION
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_Solution]
+  ALTER TABLE [SolutionDetail] DROP CONSTRAINT IF EXISTS [FK_SolutionDetail_PublicationStatus]
   COMMIT
 END
 
@@ -170,6 +175,7 @@ BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [SolutionPrice] DROP CONSTRAINT IF EXISTS [FK_SolutionPrice_PurchasingModelId]
   ALTER TABLE [SolutionPrice] DROP CONSTRAINT IF EXISTS [FK_SolutionPrice_PricingUnitType]
+  ALTER TABLE [SolutionPrice] DROP CONSTRAINT IF EXISTS [FK_SolutionPrice_PriceType]
   COMMIT
 END
 
@@ -186,6 +192,7 @@ IF OBJECT_ID('[Standard]', 'U') IS NOT NULL
 BEGIN
   BEGIN TRANSACTION
   ALTER TABLE [Standard] DROP CONSTRAINT IF EXISTS [FK_Standard_StandardCategory]
+  ALTER TABLE [Standard] DROP CONSTRAINT IF EXISTS [FK_Standard_StandardStatus]
   COMMIT
 END
 
@@ -195,7 +202,6 @@ DROP TABLE IF EXISTS [dbo].[AssociatedServicePrice];
 DROP TABLE IF EXISTS [dbo].[AssociatedService];
 DROP TABLE IF EXISTS [dbo].[AdditionalServicePrice];
 DROP TABLE IF EXISTS [dbo].[SolutionPrice];
-DROP TABLE IF EXISTS [dbo].[PurchasingModel];
 DROP TABLE IF EXISTS [dbo].[PricingUnitType];
 DROP TABLE IF EXISTS [dbo].[SolutionDefinedEpicAcceptanceCriteria];
 DROP TABLE IF EXISTS [dbo].[SolutionDefinedEpic];
@@ -207,11 +213,10 @@ DROP TABLE IF EXISTS [dbo].[SolutionEpicStatus];
 DROP TABLE IF EXISTS [dbo].[SolutionCapability];
 DROP TABLE IF EXISTS [dbo].[SolutionCapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[MarketingDetail];
-DROP TABLE IF EXISTS [dbo].[Solution];
 DROP TABLE IF EXISTS [dbo].[SolutionSupplierStatus];
 DROP TABLE IF EXISTS [dbo].[SolutionAuthorityStatus];
-DROP TABLE IF EXISTS [dbo].[PublicationStatus];
-DROP TABLE IF EXISTS [dbo].[OrganisationContact];
+DROP TABLE IF EXISTS [dbo].[SupplierContact];
+DROP TABLE IF EXISTS [dbo].[Supplier];
 DROP TABLE IF EXISTS [dbo].[Organisation];
 DROP TABLE IF EXISTS [dbo].[FrameworkStandards];
 DROP TABLE IF EXISTS [dbo].[FrameworkCapabilities];
@@ -227,6 +232,12 @@ DROP TABLE IF EXISTS [dbo].[CapabilityStatus];
 DROP TABLE IF EXISTS [dbo].[CapabilityCategory];
 DROP TABLE IF EXISTS [dbo].[CompliancyLevel];
 DROP TABLE IF EXISTS [dbo].[Audit];
+DROP TABLE IF EXISTS [dbo].[AdditionalServiceDetail];
+DROP TABLE IF EXISTS [dbo].[PriceType];
+DROP TABLE IF EXISTS [dbo].[PricingUnit];
+DROP TABLE IF EXISTS [dbo].[SolutionDetail];
+DROP TABLE IF EXISTS [dbo].[Solution];
+DROP TABLE IF EXISTS [dbo].[PurchasingModel];
+DROP TABLE IF EXISTS [dbo].[PublicationStatus];
 
 COMMIT
-
