@@ -15,10 +15,10 @@ DECLARE @Capabilities SolutionImportCapability
 SET DATA HERE
 ***/
 
-SET @SupplierId = '10000'
-SET @SupplierName = 'EMIS'
-SET @SolutionId = '10000-001'
-SET @SolutionName = 'Emis Web GP'
+SET @SupplierId = '99999'
+SET @SupplierName = 'NotEmis Health'
+SET @SolutionId = '99999-89'
+SET @SolutionName = 'NotEmis Web GP'
 SET @IsFoundation = 1
 INSERT INTO @Capabilities VALUES('C20'),('C17'),('C12'),('C16'),('C11'),('C15'),('C41'),('C14'),('C13'),('C30'),('C10'),('C6'),('C5')
 
