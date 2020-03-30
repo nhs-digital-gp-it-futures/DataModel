@@ -3,10 +3,10 @@ IF type_id('[dbo].[AdditionalServiceImportCapability]') IS NULL
 CREATE TYPE [dbo].[AdditionalServiceImportCapability] as TABLE (CapabilityRef varchar(10)) 
 GO
 
-CREATE OR ALTER PROCEDURE AddtionServiceImport
+CREATE OR ALTER PROCEDURE AdditionalServiceImport
 	@SupplierId varchar(6),
 	@ParentSolutionId varchar(16),
-	@AdditionServiceId varchar(16),
+	@AdditionalServiceId varchar(16),
 	@ServiceName varchar(255),
 	@ServiceSummary varchar(300),
 	@ServiceDescription varchar(3000),
@@ -35,7 +35,7 @@ BEGIN TRY
 	/***
 	Verify that Parent Solution ID is correct for Additional Service ID
 	***/
-	IF SUBSTRING(@AdditionServiceId, 1, CHARINDEX('A', @AdditionServiceId) - 1) <> @ParentSolutionId
+	IF SUBSTRING(@AdditionalServiceId, 1, CHARINDEX('A', @AdditionalServiceId) - 1) <> @ParentSolutionId
 		THROW 51000, 'Additional Service ID not correct for parent Solution ID.', 1;  
 
 	/***
@@ -48,9 +48,9 @@ BEGIN TRY
 		FROM [dbo].[Solution] WHERE [Id] =  @ParentSolutionId;
 
 	/***
-	Add the Addition Service if not already present
+	Add the Additional Service if not already present
 	***/
-	IF NOT EXISTS (SELECT 1 FROM [dbo].[Solution] WHERE [Id] =  @AdditionServiceId)	
+	IF NOT EXISTS (SELECT 1 FROM [dbo].[Solution] WHERE [Id] =  @AdditionalServiceId)	
 	INSERT INTO [dbo].[Solution]
 			   ([Id]
 			   ,[ParentId]
@@ -62,7 +62,7 @@ BEGIN TRY
 			   ,[LastUpdated]
 			   ,[LastUpdatedBy])
 		 VALUES
-			   (@AdditionServiceId
+			   (@AdditionalServiceId
 			   ,@ParentSolutionId
 			   ,@SupplierId
 			   ,@ServiceName 
@@ -73,21 +73,21 @@ BEGIN TRY
 			   ,@EmptyGuid)	
 
 	/***
-	Update solution name
+	Update Additional Service name
 	***/
 	UPDATE [dbo].[Solution] 
 	SET [Name] = @ServiceName, 
 		PublishedStatusId = @PublishedStatusId, 
 		AuthorityStatusId = @AuthorityStatusId,
 		SupplierStatusId = @SupplierStatusId
-	WHERE [Id] = @AdditionServiceId;
+	WHERE [Id] = @AdditionalServiceId;
 
 	/***
-	Add the solution detail for the Additional Service if not already present and referenced by the Additional Service 
+	Add the Additional Service detail for the Additional Service if not already present and referenced by the Additional Service 
 	***/
 	IF NOT EXISTS (SELECT 1 FROM [dbo].[Solution] s
 	INNER JOIN [dbo].[SolutionDetail] sd ON s.[Id] = sd.[SolutionId] AND s.[SolutionDetailId] = sd.[Id]
-	WHERE s.[Id] =  @AdditionServiceId)
+	WHERE s.[Id] =  @AdditionalServiceId)
 	BEGIN
 		SELECT @SolutionDetailId = NEWID()
 		INSERT INTO [dbo].[SolutionDetail]
@@ -100,7 +100,7 @@ BEGIN TRY
 				   ,[LastUpdatedBy])
 			 VALUES
 				   (@SolutionDetailId
-				   ,@AdditionServiceId
+				   ,@AdditionalServiceId
 				   ,@ServiceSummary
 				   ,@ServiceDescription
 				   ,@PublishedStatusId
@@ -108,22 +108,22 @@ BEGIN TRY
 				   ,@EmptyGuid)
 
 		/***
-		Update the solution with the new Solution detail Id
+		Update the Additional Service with the new Additional Service detail Id
 		***/
 		UPDATE [dbo].[Solution] 
 		SET [SolutionDetailId] = @SolutionDetailId
-		WHERE [Id] =  @AdditionServiceId
+		WHERE [Id] =  @AdditionalServiceId
 	END
 
 	/***
-	Claim the solution capabilities
+	Claim the Additional Service capabilities
 	***/
 	DELETE 
 	FROM [dbo].[SolutionCapability]
-	WHERE [SolutionId] = @AdditionServiceId
+	WHERE [SolutionId] = @AdditionalServiceId
 
 	INSERT INTO [dbo].[SolutionCapability]
-	SELECT @AdditionServiceId AS SolutionId
+	SELECT @AdditionalServiceId AS SolutionId
 		,c.[Id] as [CapabilityId]
 		,1 AS [StatusId] --Passed - Full
 		,GETUTCDATE() AS [LastUpdated]
