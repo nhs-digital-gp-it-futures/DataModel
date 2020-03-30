@@ -36,7 +36,7 @@ print @ServiceDescription
 
 select * from @Capabilities
 
-EXEC AddtionalServiceImport
+EXEC AdditionalServiceImport
 	@SupplierId,
 	@ParentSolutionId,
 	@AdditionalServiceId,
