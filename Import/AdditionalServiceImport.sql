@@ -4,8 +4,6 @@ CREATE TYPE [dbo].[AdditionalServiceImportCapability] as TABLE (CapabilityRef va
 GO
 
 CREATE OR ALTER PROCEDURE AdditionalServiceImport
-	@SupplierId varchar(6),
-	@ParentSolutionId varchar(16),
 	@AdditionalServiceId varchar(16),
 	@ServiceName varchar(255),
 	@ServiceSummary varchar(300),
@@ -25,19 +23,9 @@ BEGIN TRY
 	DECLARE @PublishedStatusId int
 	DECLARE @AuthorityStatusId int
 	DECLARE @SupplierStatusId int
-
-	/***
-	Verify that Parent Solution ID is correct for Additional Service ID
-	***/
-	IF SUBSTRING(@ParentSolutionId, 1, CHARINDEX('-', @ParentSolutionId) - 1) <> @SupplierId
-		THROW 51000, 'Parent Solution ID not correct for Supplier.', 1;  
-
-	/***
-	Verify that Parent Solution ID is correct for Additional Service ID
-	***/
-	IF SUBSTRING(@AdditionalServiceId, 1, CHARINDEX('A', @AdditionalServiceId) - 1) <> @ParentSolutionId
-		THROW 51000, 'Additional Service ID not correct for parent Solution ID.', 1;  
-
+	DECLARE @ParentSolutionId varchar(16) = SUBSTRING(@AdditionalServiceId, 1, CHARINDEX('A', @AdditionalServiceId) - 1)
+	DECLARE @SupplierId varchar(6) = SUBSTRING(@ParentSolutionId, 1, CHARINDEX('-', @ParentSolutionId) - 1)
+	
 	/***
 	Verify that parent Solution Exists
 	***/
