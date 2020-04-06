@@ -4,8 +4,6 @@ CREATE TYPE [dbo].[SolutionImportCapability] as TABLE (CapabilityRef varchar(10)
 GO
 
 CREATE OR ALTER PROCEDURE SolutionImport
-	@SupplierId varchar(6),
-	@SupplierName varchar(255), -- not used, useful for keeping track
 	@SolutionId varchar(14),
 	@SolutionName varchar(255),
 	@IsFoundation bit,
@@ -23,8 +21,7 @@ BEGIN TRY
 	DECLARE @EmptyGuid UNIQUEIDENTIFIER = 0x0
 	DECLARE @FrameworkId varchar(10) = 'NHSDGP001'
 	DECLARE @SolutionDetailId UNIQUEIDENTIFIER
-
-
+	DECLARE @SupplierId varchar(6) = SUBSTRING(@SolutionId, 1, CHARINDEX('-', @SolutionId) - 1)
 
 	/***
 	Verify that organisation and supplier exist 
