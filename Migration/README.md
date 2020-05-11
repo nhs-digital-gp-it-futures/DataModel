@@ -27,7 +27,7 @@ Source and Destination are currently set as follows.
 * Source: localhost, buyingcatalogue_source
 * Destination: localhost, buyingcatalogue_dest
 
-**This is deliberate, please reset the source and destination connection  information (in `Project.params`) before running the script**.
+**This is deliberate, please reset the source and destination connection information (in `Project.params`) before running the script**.
 
 ## Running the script
 
