@@ -13,8 +13,8 @@
   DTS:MaxErrorCount="0"
   DTS:ObjectName="PublishAll"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{B51E15E2-845A-4690-B56D-954E809A7850}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{DA60A536-EF61-43DD-9E3D-F3FA18AAAC88}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -32,7 +32,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{6A524C55-AF8E-4ED6-899C-477C5B91187A}"
-          SQLTask:SqlStatementSource="&#xA;DELETE FROM [FrameworkSolutions]&#xA;UPDATE [Solution] SET SolutionDetailId = NULL&#xA;DELETE FROM [SolutionDetail]&#xA;DELETE FROM [SolutionCapability]&#xA;DELETE FROM [Solution]&#xA;DELETE FROM [MarketingContact]&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM dbo.FrameworkSolutions;&#xA;&#xA;UPDATE dbo.Solution&#xA;SET SolutionDetailId = NULL;&#xA;&#xA;DELETE FROM dbo.SolutionDetail;&#xA;DELETE FROM dbo.SolutionCapability;&#xA;DELETE FROM dbo.Solution;&#xA;DELETE FROM dbo.MarketingContact;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
