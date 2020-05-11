@@ -14,11 +14,11 @@ This script migrates the following tables from one buying catalogue database to 
 * Visual Studio 2019
 * Visual Studio SQL Server Data Tools
 
-You will need to install Sql Server Data Tools as per instructions [here](https://docs.microsoft.com/en-us/sql/ssdt/sql-server-data-tools?view=sql-server-ver15).
+You will need to install SQL Server Data Tools as per instructions [here](https://docs.microsoft.com/en-us/sql/ssdt/sql-server-data-tools?view=sql-server-ver15).
 
 Note that you may need to modify your Visual Studio installation (use Visual Studio Installer) to include the **Data storage and processing** workload.
 
-Integration Services is then enabled by installing the Visual Studio extension **Sql Server Integration Services Projects**.
+Integration Services is then enabled by installing the Visual Studio extension **SQL Server Integration Services Projects**.
 
 ## Source and Destination
 
@@ -27,7 +27,7 @@ Source and Destination are currently set as follows.
 * Source: localhost, buyingcatalogue_source
 * Destination: localhost, buyingcatalogue_dest
 
-**This is deliberate, please reset the source and destination connection (in `Project.params`) information before running the script**.
+**This is deliberate, please reset the source and destination connection  information (in `Project.params`) before running the script**.
 
 ## Running the script
 
