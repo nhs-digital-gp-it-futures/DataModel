@@ -16,7 +16,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue;Persist Security Info=True;Application Name=SSIS-PublishAll-{6A524C55-AF8E-4ED6-899C-477C5B91187A}DestinationConnectionAdoNET;</SSIS:Property>
+        SSIS:Name="Value">Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue_dest;Persist Security Info=True;Application Name=SSIS-PublishAll-{6A524C55-AF8E-4ED6-899C-477C5B91187A}DestinationConnectionAdoNET;</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -37,7 +37,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue1;Persist Security Info=True;Application Name=SSIS-{78F2511D-6302-4CBB-BA3F-E846781DC61D}SourceConnectionAdoNET;</SSIS:Property>
+        SSIS:Name="Value">Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue_source;Persist Security Info=True;Application Name=SSIS-{78F2511D-6302-4CBB-BA3F-E846781DC61D}SourceConnectionAdoNET;</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
