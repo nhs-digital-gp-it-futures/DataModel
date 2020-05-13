@@ -3,8 +3,10 @@
   DTS:ObjectName="DestinationConnectionAdoNET"
   DTS:DTSID="{6A524C55-AF8E-4ED6-899C-477C5B91187A}"
   DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::DestinationConnectionAdoNET_ConnectionString]</DTS:PropertyExpression>
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue;Persist Security Info=True;Application Name=SSIS-PublishAll-{6A524C55-AF8E-4ED6-899C-477C5B91187A}DestinationConnectionAdoNET;" />
+      DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=buyingcatalogue_dest;Persist Security Info=True;Application Name=SSIS-PublishAll-{6A524C55-AF8E-4ED6-899C-477C5B91187A}DestinationConnectionAdoNET;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>
